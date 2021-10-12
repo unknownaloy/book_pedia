@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "819384421061",
+    "project_id": "book-pedia",
+    "storage_bucket": "book-pedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819384421061:android:7294a3d824c38beda0feac",
+        "android_client_info": {
+          "package_name": "com.example.book_pedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819384421061-k113inco9kqbj4d9adbvta2q17bp7ep8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwjuGxnwxRLm6XVuZ8Buw7s8uiMWXnWP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819384421061-k113inco9kqbj4d9adbvta2q17bp7ep8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819384421061-m517l9g13mbs7js900mrikkcusect2ts.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookPedia"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

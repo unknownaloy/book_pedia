@@ -1,0 +1,10 @@
+ {
+    "home": "Home",
+    "@home": {
+        "description": "The home tab title"
+    },
+    "recommendations": "Recommendations",
+    "@recommendations": {
+        "description": "Recommended images"
+    }
+ }
