@@ -1,4 +1,6 @@
 {
-  "home": "Accueil",
-  "recommendations": "Recommandations"
+  "createAnAccount": "Créer un compte",
+  "emailAddress": "Adresse e-mail",
+  "alreadyHaveAnAccount": "Vous avez déjà un compte?",
+  "password": "Mot de passe"
 }
