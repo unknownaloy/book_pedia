@@ -1,7 +1,7 @@
 import 'package:book_pedia/l10n/l10n.dart';
 import 'package:book_pedia/styles/light_theme.dart';
 import 'package:book_pedia/ui/landing_screen.dart';
-import 'package:book_pedia/ui/sign_in.dart';
+import 'package:book_pedia/ui/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

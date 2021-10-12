@@ -8,5 +8,6 @@ ThemeData lightTheme() {
   return baseTheme.copyWith(
     scaffoldBackgroundColor: kScaffoldColor,
     textTheme: kLightTextTheme,
+    hintColor: kHintColor,
   );
 }

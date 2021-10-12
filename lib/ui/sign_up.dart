@@ -1,8 +1,25 @@
+import 'package:book_pedia/components/custom_text_field.dart';
 import 'package:book_pedia/styles/colors.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
+
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +37,11 @@ class SignIn extends StatelessWidget {
               const SizedBox(
                 height: 24.0,
               ),
-              const TextField(
-                decoration: InputDecoration(
-                  focusColor: kActionColor,
-                  hintText: "Email Address",
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: kActionColor,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
+              CustomTextField(hintText: "Email Address", controller: _emailController,),
               const SizedBox(
                 height: 24.0,
               ),
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: kActionColor,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
+              CustomTextField(hintText: "Password", controller: _passwordController, isObscure: true,),
               const SizedBox(
                 height: 28.0,
               ),

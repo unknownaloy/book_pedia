@@ -6,8 +6,13 @@ final kHeading6Style = GoogleFonts.openSans(
   fontWeight: FontWeight.w700,
 );
 
-final kBodyText2Style = GoogleFonts.openSans(
+final kBodyText1Style = GoogleFonts.openSans(
   fontSize: 16.0,
+  fontWeight: FontWeight.w400,
+);
+
+final kBodyText2Style = GoogleFonts.openSans(
+  fontSize: 14.0,
   fontWeight: FontWeight.w500,
 );
 
