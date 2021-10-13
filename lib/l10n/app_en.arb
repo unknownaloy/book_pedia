@@ -3,6 +3,14 @@
     "@createAnAccount": {
         "description": "The sign up instruction text"
     },
+    "logIn": "Log in",
+    "@logIn": {
+        "description": "Log in text"
+    },
+    "signUp": "Sign up",
+    "@signUp": {
+        "description": "Sign up"
+    },
     "emailAddress": "Email Address",
     "@emailAddress": {
         "description": "Electronic mail"
@@ -14,5 +22,9 @@
     "alreadyHaveAnAccount": "Already have an account?",
     "@alreadyHaveAnAccount": {
         "description": "Question to user if they have account on the app"
+    },
+    "dontHaveAnAccount": "Don't have an account?",
+    "@dontHaveAnAccount": {
+        "description": "Don't have an account with the app"
     }
  }

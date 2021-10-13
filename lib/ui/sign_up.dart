@@ -1,16 +1,17 @@
 import 'package:book_pedia/components/button.dart';
 import 'package:book_pedia/components/custom_text_field.dart';
+import 'package:book_pedia/ui/sign_in.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -62,6 +63,13 @@ class _SignInState extends State<SignIn> {
               GestureDetector(
                 onTap: () {
                   //Handle tap gesture
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const SignIn(),
+                    ),
+                  );
                 },
                 child: Text(
                   AppLocalizations.of(context)!.alreadyHaveAnAccount,

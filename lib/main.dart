@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       ],
       title: 'Book Pedia',
       theme: lightTheme(),
-      home: const SignIn(),
+      home: const SignUp(),
     );
   }
 }
