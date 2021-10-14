@@ -16,6 +16,13 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+
+    _emailController.addListener(() { });
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
