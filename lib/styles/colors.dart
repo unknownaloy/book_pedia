@@ -8,6 +8,8 @@ const kAccentColor = Color(0xffFF865E);
 
 const kBaseColor = Color(0xffFEF9EF);
 
+const kShadowColor = Color(0xffE1E2E1);
+
 const kHighLightColor = Color(0xffA2D2FF);
 
 final kHintColor = Colors.black.withOpacity(0.42);

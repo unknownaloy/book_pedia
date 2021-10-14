@@ -26,5 +26,13 @@
     "dontHaveAnAccount": "Don't have an account?",
     "@dontHaveAnAccount": {
         "description": "Don't have an account with the app"
+    },
+    "exploreThousandsOfBooksOnTheGo": "Explore thousands of books on the go",
+    "@exploreThousandsOfBooksOnTheGo": {
+        "description": "Catchy welcome phrase on exploring books through the app"
+    },
+    "searchForBooks": "Search for books...",
+    "@searchForBooks": {
+        "description": "Placeholder text in the search field"
     }
  }

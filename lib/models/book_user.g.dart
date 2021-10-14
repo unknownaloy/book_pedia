@@ -8,8 +8,8 @@ part of 'book_user.dart';
 
 BookUser _$BookUserFromJson(Map<String, dynamic> json) {
   return BookUser(
-    id: json['id'] as String,
-    email: json['email'] as String,
+    id: json['id'] as String?,
+    email: json['email'] as String?,
   );
 }
 

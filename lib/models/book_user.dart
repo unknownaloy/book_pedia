@@ -5,10 +5,10 @@ part 'book_user.g.dart';
 
 @JsonSerializable()
 class BookUser extends Equatable {
-  final String id;
+  final String? id;
 
 
-  final String email;
+  final String? email;
 
   const BookUser({
     required this.id,
@@ -16,7 +16,7 @@ class BookUser extends Equatable {
   });
 
   @override
-  List<Object> get props => [id, email];
+  List<Object?> get props => [id, email];
 
   factory BookUser.fromJson(Map<String, dynamic> json) =>
       _$BookUserFromJson(json);

@@ -13,7 +13,7 @@ class AuthService {
           .createUserWithEmailAndPassword(email: email, password: password);
       final user = userCredential.user;
 
-      BookUser bookUser = BookUser(id: user!.uid, email: user.email!);
+      BookUser? bookUser = BookUser(id: user?.uid, email: user?.email);
       return bookUser;
     } on FirebaseException catch (e) {
       if (e.code == 'weak-password') {
@@ -36,7 +36,7 @@ class AuthService {
 
   BookUser getUser() {
     User? user = _auth.currentUser;
-    BookUser? bookUser = BookUser(id: user!.uid, email: user.email!);
+    BookUser? bookUser = BookUser(id: user?.uid, email: user?.email!);
     return bookUser;
   }
 
