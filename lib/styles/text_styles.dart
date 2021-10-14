@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final kHeading6Style = GoogleFonts.openSans(
+final kHeadLine1Style = GoogleFonts.poppins(
+  fontSize: 40.0,
+  fontWeight: FontWeight.w700,
+);
+
+final kHeadLine2Style = GoogleFonts.openSans(
   fontSize: 26.0,
   fontWeight: FontWeight.w700,
 );

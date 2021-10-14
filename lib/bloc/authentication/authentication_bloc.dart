@@ -26,6 +26,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapAppStartedToState(
       AuthenticationEvent event) async* {
     try {
+      print("Inside the _mapAppStartedToState");
       // TODO: Save user's data to SharedPreferences and check data there
       final isSignedIn = _authService.isSignedIn();
 

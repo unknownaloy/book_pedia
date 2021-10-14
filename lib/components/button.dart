@@ -20,7 +20,7 @@ class Button extends StatelessWidget {
           const Size.fromHeight(56.0),
         ),
         backgroundColor:
-        MaterialStateProperty.all<Color>(kActionColor),
+        MaterialStateProperty.all<Color>(kAccentColor),
       ),
       onPressed: onPressed,
     );
