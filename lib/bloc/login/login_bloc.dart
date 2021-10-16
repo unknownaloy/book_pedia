@@ -27,7 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginLoading();
 
     try {
-      final bookUser = await _authService.signUpWithEmailAndPassword(
+      final bookUser = await _authService.signInWithEmailAndPassword(
         email: email,
         password: password,
       );

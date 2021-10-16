@@ -5,7 +5,7 @@ import 'package:book_pedia/l10n/l10n.dart';
 import 'package:book_pedia/services/auth_service.dart';
 import 'package:book_pedia/styles/light_theme.dart';
 import 'package:book_pedia/ui/screens/home_screen.dart';
-import 'package:book_pedia/ui/screens/login.dart';
+import 'package:book_pedia/ui/screens/login_screen.dart';
 import 'package:book_pedia/ui/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +16,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -64,15 +65,17 @@ class _MyAppState extends State<MyApp> {
               return const SplashScreen();
             }
 
-            if (state is Authenticated) {
-              return const HomeScreen();
+            if (state is Unauthenticated) {
+              return const LoginScreen();
             }
 
-            return const Login();
+            return const HomeScreen();
 
-            return Container(
-              color: Colors.green,
-            );
+            // return const HomeScreen();
+
+            // return Container(
+            //   color: Colors.green,
+            // );
           },
         ),
       ),

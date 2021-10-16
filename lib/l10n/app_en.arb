@@ -19,9 +19,9 @@
     "@password": {
         "description": "User's password"
     },
-    "alreadyHaveAnAccount": "Already have an account?",
+    "alreadyHaveAnAccount": "Already have an account",
     "@alreadyHaveAnAccount": {
-        "description": "Question to user if they have account on the app"
+        "description": "Clickable text the user should use if they already have an account"
     },
     "dontHaveAnAccount": "Don't have an account?",
     "@dontHaveAnAccount": {

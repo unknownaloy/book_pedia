@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 InputDecoration inputDecoration(String? hintText) {
   return InputDecoration(
+    isDense: true,
     hintText: hintText,
     border: const OutlineInputBorder(),
     focusedBorder: const OutlineInputBorder(
