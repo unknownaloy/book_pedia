@@ -8,41 +8,41 @@ part 'book_volume_info.g.dart';
 class BookVolumeInfo extends Equatable {
   final String title;
 
-  final String subTitle;
+  final String? subtitle;
 
-  final List<String> authors;
+  final List<String>? authors;
 
-  @JsonKey(name: "averageRating")
-  final double rating;
-
-  final int ratingsCount;
-
-  final String description;
+  final String? description;
 
   @JsonKey(name: "pageCount")
-  final int pages;
+  final int? pages;
 
   final List<String> categories;
+
+  @JsonKey(name: "averageRating")
+  final double? rating;
+
+  final int? ratingsCount;
 
   @JsonKey(name: "imageLinks")
   final BookImages bookImages;
 
   const BookVolumeInfo({
     required this.title,
-    required this.subTitle,
-    required this.authors,
-    required this.rating,
-    required this.ratingsCount,
-    required this.description,
-    required this.pages,
+    this.subtitle,
+    this.authors,
+    this.description,
+    this.pages,
     required this.categories,
+    this.rating,
+    this.ratingsCount,
     required this.bookImages,
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         title,
-        subTitle,
+        subtitle,
         authors,
         rating,
         ratingsCount,

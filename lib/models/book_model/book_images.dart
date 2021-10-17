@@ -10,16 +10,10 @@ class BookImages extends Equatable {
   @JsonKey(name: "thumbnail")
   final String mainThumbnail;
 
-  const BookImages({
-    required this.smallThumbnail,
-    required this.mainThumbnail,
-  });
+  const BookImages({required this.smallThumbnail, required this.mainThumbnail});
 
   @override
-  List<Object> get props => [
-        smallThumbnail,
-        mainThumbnail,
-      ];
+  List<Object> get props => [smallThumbnail, mainThumbnail];
 
   factory BookImages.fromJson(Map<String, dynamic> json) =>
       _$BookImagesFromJson(json);

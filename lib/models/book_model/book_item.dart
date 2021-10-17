@@ -7,6 +7,8 @@ part 'book_item.g.dart';
 @JsonSerializable(explicitToJson: true)
 class BookItem extends Equatable {
   final String id;
+
+  @JsonKey(name: "volumeInfo")
   final BookVolumeInfo bookVolumeInfo;
 
   const BookItem({
@@ -15,7 +17,7 @@ class BookItem extends Equatable {
   });
 
   @override
-  List<Object> get props => [id, bookVolumeInfo,];
+  List<Object> get props => [id, bookVolumeInfo];
 
   factory BookItem.fromJson(Map<String, dynamic> json) =>
       _$BookItemFromJson(json);
