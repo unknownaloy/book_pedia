@@ -70,12 +70,6 @@ class _MyAppState extends State<MyApp> {
             }
 
             return const HomeScreen();
-
-            // return const HomeScreen();
-
-            // return Container(
-            //   color: Colors.green,
-            // );
           },
         ),
       ),

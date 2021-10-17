@@ -1,5 +1,5 @@
-import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/styles/colors.dart';
+import 'package:book_pedia/ui/components/book_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -8,8 +8,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookService = BooksService();
-    bookService.fetchFamousBooks();
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -23,22 +21,6 @@ class HomeScreen extends StatelessWidget {
                 AppLocalizations.of(context)!.exploreThousandsOfBooksOnTheGo,
                 style: Theme.of(context).textTheme.headline2,
               ),
-              // TextField(
-              //   decoration: InputDecoration(
-              //     prefixIcon: const Icon(Icons.add),
-              //     hintText: "Search for books...",
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(50.0),
-              //     ),
-              //     focusedBorder: OutlineInputBorder(
-              //       borderSide: const BorderSide(
-              //         color: kAccentColor,
-              //         width: 2.0,
-              //       ),
-              //       borderRadius: BorderRadius.circular(50.0),
-              //     ),
-              //   ),
-              // ),
               const SizedBox(
                 height: 24.0,
               ),
@@ -64,13 +46,17 @@ class HomeScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1,
                   decoration: InputDecoration(
                     prefixIcon: const Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 32.0, right: 16.0,),
+                      padding: EdgeInsets.only(
+                        top: 10.0,
+                        left: 32.0,
+                        right: 16.0,
+                      ),
                       child: Icon(
                         Icons.search,
                       ),
                     ),
-                    contentPadding:
-                       const EdgeInsets.only(left: 24.0, right: 24.0, top: 16.0),
+                    contentPadding: const EdgeInsets.only(
+                        left: 24.0, right: 24.0, top: 16.0),
                     hintText: AppLocalizations.of(context)!.searchForBooks,
                     border: InputBorder.none,
                     focusColor: kAccentColor,
@@ -78,6 +64,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              const SizedBox(height: 24.0,),
+              const BookCard(
+                  imageUrl: "http://books.google.com/books/content?id=CBwQkAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"),
             ],
           ),
         ),

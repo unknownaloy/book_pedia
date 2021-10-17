@@ -17,7 +17,7 @@ class BookVolumeInfo extends Equatable {
   @JsonKey(name: "pageCount")
   final int? pages;
 
-  final List<String> categories;
+  final List<String>? categories;
 
   @JsonKey(name: "averageRating")
   final double? rating;

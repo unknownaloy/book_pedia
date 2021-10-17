@@ -11,6 +11,16 @@ final kHeadLine2Style = GoogleFonts.openSans(
   fontWeight: FontWeight.w700,
 );
 
+final kHeadLine3Style = GoogleFonts.openSans(
+  fontSize: 20.0,
+  fontWeight: FontWeight.w600,
+);
+
+final kHeadLine4Style = GoogleFonts.openSans(
+  fontSize: 16.0,
+  fontWeight: FontWeight.w700,
+);
+
 final kBodyText1Style = GoogleFonts.openSans(
   fontSize: 16.0,
   fontWeight: FontWeight.w400,
@@ -19,6 +29,11 @@ final kBodyText1Style = GoogleFonts.openSans(
 final kBodyText2Style = GoogleFonts.openSans(
   fontSize: 14.0,
   fontWeight: FontWeight.w500,
+);
+
+final kSubtitle1Style = GoogleFonts.openSans(
+  fontSize: 14.0,
+  fontWeight: FontWeight.w600,
 );
 
 final kButtonStyle = GoogleFonts.openSans(

@@ -13,3 +13,5 @@ const kShadowColor = Color(0xffE1E2E1);
 const kHighLightColor = Color(0xffA2D2FF);
 
 final kHintColor = Colors.black.withOpacity(0.42);
+
+const kChipTextColor = Color(0xff70A1CC);

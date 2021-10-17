@@ -14,8 +14,9 @@ BookVolumeInfo _$BookVolumeInfoFromJson(Map<String, dynamic> json) {
         (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
     description: json['description'] as String?,
     pages: json['pageCount'] as int?,
-    categories:
-        (json['categories'] as List<dynamic>).map((e) => e as String).toList(),
+    categories: (json['categories'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
     rating: (json['averageRating'] as num?)?.toDouble(),
     ratingsCount: json['ratingsCount'] as int?,
     bookImages: BookImages.fromJson(json['imageLinks'] as Map<String, dynamic>),
