@@ -1,3 +1,4 @@
+import 'package:book_pedia/utilities/custom_methods.dart';
 import 'package:equatable/equatable.dart';
 
 class BookUser extends Equatable {
@@ -10,6 +11,11 @@ class BookUser extends Equatable {
     required this.id,
     required this.email,
   });
+
+  @override
+  String toString() {
+    return CustomMethods.removeAtSymbolFromEmail(email!);
+  }
 
   @override
   List<Object?> get props => [id, email];

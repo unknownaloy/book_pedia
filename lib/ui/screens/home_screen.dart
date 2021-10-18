@@ -4,6 +4,7 @@ import 'package:book_pedia/bloc/home/home_state.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/styles/colors.dart';
 import 'package:book_pedia/ui/components/book_card.dart';
+import 'package:book_pedia/ui/components/home_drawer.dart';
 import 'package:book_pedia/ui/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(),
+        drawer: const HomeDrawer(),
         body: BlocProvider(
           create: (context) => _homeBloc,
           child: Padding(
@@ -158,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MaterialPageRoute<void>(
                                           builder: (BuildContext context) =>
                                               DetailsScreen(
-                                                bookItem: book,
+                                            bookItem: book,
                                           ),
                                         ),
                                       );

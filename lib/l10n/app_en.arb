@@ -3,34 +3,42 @@
     "@createAnAccount": {
         "description": "The sign up instruction text"
     },
+
     "logIn": "Log in",
     "@logIn": {
         "description": "Log in text"
     },
+
     "signUp": "Sign up",
     "@signUp": {
         "description": "Sign up"
     },
+
     "emailAddress": "Email Address",
     "@emailAddress": {
         "description": "Electronic mail"
     },
+
     "password": "Password",
     "@password": {
         "description": "User's password"
     },
+
     "alreadyHaveAnAccount": "Already have an account",
     "@alreadyHaveAnAccount": {
         "description": "Clickable text the user should use if they already have an account"
     },
+
     "dontHaveAnAccount": "Don't have an account?",
     "@dontHaveAnAccount": {
         "description": "Don't have an account with the app"
     },
+
     "exploreThousandsOfBooksOnTheGo": "Explore thousands of books on the go",
     "@exploreThousandsOfBooksOnTheGo": {
         "description": "Catchy welcome phrase on exploring books through the app"
     },
+
     "searchForBooks": "Search for books...",
     "@searchForBooks": {
         "description": "Placeholder text in the search field"
