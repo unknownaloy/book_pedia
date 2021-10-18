@@ -5,15 +5,15 @@ part 'book_images.g.dart';
 
 @JsonSerializable()
 class BookImages extends Equatable {
-  final String smallThumbnail;
+  final String? smallThumbnail;
 
   @JsonKey(name: "thumbnail")
-  final String mainThumbnail;
+  final String? mainThumbnail;
 
-  const BookImages({required this.smallThumbnail, required this.mainThumbnail});
+  const BookImages({this.smallThumbnail, this.mainThumbnail});
 
   @override
-  List<Object> get props => [smallThumbnail, mainThumbnail];
+  List<Object?> get props => [smallThumbnail, mainThumbnail];
 
   factory BookImages.fromJson(Map<String, dynamic> json) =>
       _$BookImagesFromJson(json);

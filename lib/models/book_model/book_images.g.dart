@@ -8,8 +8,8 @@ part of 'book_images.dart';
 
 BookImages _$BookImagesFromJson(Map<String, dynamic> json) {
   return BookImages(
-    smallThumbnail: json['smallThumbnail'] as String,
-    mainThumbnail: json['thumbnail'] as String,
+    smallThumbnail: json['smallThumbnail'] as String?,
+    mainThumbnail: json['thumbnail'] as String?,
   );
 }
 

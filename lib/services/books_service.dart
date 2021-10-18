@@ -7,10 +7,10 @@ import 'package:http/http.dart' as http;
 class BooksService {
   final http.Client _client = http.Client();
 
-  Future<Books> fetchFamousBooks() async {
+  Future<Books> fetchFamousBooks([String query = "famous books"]) async {
     try {
       Map<String, String> queryParams = {
-        "q": "famous books",
+        "q": query,
         "client_id": clientId,
       };
 
@@ -20,14 +20,15 @@ class BooksService {
       final response = await _client.get(uri);
 
       if (response.statusCode == 200) {
-
         final data = response.body;
 
         final decodedData = jsonDecode(data);
 
-        Books book = Books.fromJson(decodedData);
+        Books books = Books.fromJson(decodedData);
 
-        return book;
+        print("$books == FROM SERVICE METHOD");
+
+        return books;
       } else {
         throw Exception("Couldn't get data");
       }

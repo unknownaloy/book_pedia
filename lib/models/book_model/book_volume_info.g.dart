@@ -19,7 +19,9 @@ BookVolumeInfo _$BookVolumeInfoFromJson(Map<String, dynamic> json) {
         .toList(),
     rating: (json['averageRating'] as num?)?.toDouble(),
     ratingsCount: json['ratingsCount'] as int?,
-    bookImages: BookImages.fromJson(json['imageLinks'] as Map<String, dynamic>),
+    bookImages: json['imageLinks'] == null
+        ? null
+        : BookImages.fromJson(json['imageLinks'] as Map<String, dynamic>),
   );
 }
 
@@ -33,5 +35,5 @@ Map<String, dynamic> _$BookVolumeInfoToJson(BookVolumeInfo instance) =>
       'categories': instance.categories,
       'averageRating': instance.rating,
       'ratingsCount': instance.ratingsCount,
-      'imageLinks': instance.bookImages.toJson(),
+      'imageLinks': instance.bookImages?.toJson(),
     };

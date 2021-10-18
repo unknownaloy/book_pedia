@@ -8,12 +8,14 @@ part of 'books.dart';
 
 Books _$BooksFromJson(Map<String, dynamic> json) {
   return Books(
-    bookItem: (json['items'] as List<dynamic>)
-        .map((e) => BookItem.fromJson(e as Map<String, dynamic>))
+    totalItems: json['totalItems'] as int,
+    bookItem: (json['items'] as List<dynamic>?)
+        ?.map((e) => BookItem.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
 }
 
 Map<String, dynamic> _$BooksToJson(Books instance) => <String, dynamic>{
-      'items': instance.bookItem.map((e) => e.toJson()).toList(),
+      'totalItems': instance.totalItems,
+      'items': instance.bookItem?.map((e) => e.toJson()).toList(),
     };

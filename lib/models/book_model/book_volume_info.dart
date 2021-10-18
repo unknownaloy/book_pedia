@@ -25,7 +25,7 @@ class BookVolumeInfo extends Equatable {
   final int? ratingsCount;
 
   @JsonKey(name: "imageLinks")
-  final BookImages bookImages;
+  final BookImages? bookImages;
 
   const BookVolumeInfo({
     required this.title,
@@ -36,7 +36,7 @@ class BookVolumeInfo extends Equatable {
     required this.categories,
     this.rating,
     this.ratingsCount,
-    required this.bookImages,
+    this.bookImages,
   });
 
   @override

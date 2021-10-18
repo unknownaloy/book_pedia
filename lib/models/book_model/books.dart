@@ -6,13 +6,15 @@ part 'books.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Books extends Equatable {
-  @JsonKey(name: "items")
-  final List<BookItem> bookItem;
+  final int totalItems;
 
-  const Books({required this.bookItem});
+  @JsonKey(name: "items")
+  final List<BookItem>? bookItem;
+
+  const Books({required this.totalItems, this.bookItem});
 
   @override
-  List<Object> get props => [bookItem];
+  List<Object?> get props => [totalItems, bookItem];
 
   factory Books.fromJson(Map<String, dynamic> json) => _$BooksFromJson(json);
   Map<String, dynamic> toJson() => _$BooksToJson(this);

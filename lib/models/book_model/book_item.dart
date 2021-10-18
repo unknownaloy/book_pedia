@@ -12,8 +12,8 @@ class BookItem extends Equatable {
   final BookVolumeInfo bookVolumeInfo;
 
   const BookItem({
-    required this.id,
-    required this.bookVolumeInfo,
+     required this.id,
+     required this.bookVolumeInfo,
   });
 
   @override
