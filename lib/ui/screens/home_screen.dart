@@ -4,6 +4,7 @@ import 'package:book_pedia/bloc/home/home_state.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/styles/colors.dart';
 import 'package:book_pedia/ui/components/book_card.dart';
+import 'package:book_pedia/ui/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -146,8 +147,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                     imageUrl: book.bookVolumeInfo.bookImages
                                         ?.smallThumbnail,
                                     bookTitle: book.bookVolumeInfo.title,
-                                    bookAuthor: book.bookVolumeInfo.authors?[0],
+                                    bookAuthor:
+                                        book.bookVolumeInfo.authors?.join(", "),
                                     bookRating: book.bookVolumeInfo.rating,
+                                    category:
+                                        book.bookVolumeInfo.categories?[0],
+                                    onTap: () {
+                                      Navigator.push<void>(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (BuildContext context) =>
+                                              DetailsScreen(
+                                            bookVolumeInfo: book.bookVolumeInfo,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                               ),
