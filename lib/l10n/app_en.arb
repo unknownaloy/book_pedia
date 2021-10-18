@@ -42,5 +42,20 @@
     "searchForBooks": "Search for books...",
     "@searchForBooks": {
         "description": "Placeholder text in the search field"
+    },
+
+    "favorites": "Favorites",
+    "@favorites": {
+        "description": "List tile widget for navigating to the user's favorite screen"
+    },
+
+    "logout": "Logout",
+    "@logout": {
+        "description": "List tile widget for logging out from the app"
+    },
+
+    "hi": "Hi",
+    "@hi": {
+        "description": "Greeting"
     }
  }
