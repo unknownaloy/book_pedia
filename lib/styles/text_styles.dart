@@ -21,6 +21,11 @@ final kHeadLine4Style = GoogleFonts.openSans(
   fontWeight: FontWeight.w700,
 );
 
+final kHeadLine6Style = GoogleFonts.poppins(
+  fontSize: 20.0,
+  fontWeight: FontWeight.w500,
+);
+
 final kBodyText1Style = GoogleFonts.openSans(
   fontSize: 16.0,
   fontWeight: FontWeight.w400,

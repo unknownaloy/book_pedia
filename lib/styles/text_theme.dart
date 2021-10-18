@@ -7,6 +7,7 @@ final TextTheme kLightTextTheme = TextTheme(
   headline2: kHeadLine2Style.copyWith(color: kTextColor),
   headline3: kHeadLine3Style.copyWith(color: kTextColor),
   headline4: kHeadLine4Style.copyWith(color: kTextColor),
+  headline6: kHeadLine6Style.copyWith(color: kTextColor),
   bodyText1: kBodyText1Style.copyWith(color: kTextColor),
   bodyText2: kBodyText2Style.copyWith(color: kTextColor),
   subtitle1: kSubtitle1Style.copyWith(color: kChipTextColor),

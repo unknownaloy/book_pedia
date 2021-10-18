@@ -41,7 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(
+            "Book Pedia",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
         drawer: const HomeDrawer(),
         body: BlocProvider(
           create: (context) => _homeBloc,
