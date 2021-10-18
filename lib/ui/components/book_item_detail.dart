@@ -12,31 +12,29 @@ class DetailItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "$label:",
-                style: Theme.of(context).textTheme.headline4,
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "$label:",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(
+              width: 20.0,
+            ),
+            Flexible(
+              child: Text(
+                bodyText,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
-              const SizedBox(
-                width: 20.0,
-              ),
-              Flexible(
-                child: Text(
-                  bodyText,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
+        ),
 
-          const Divider(),
-        ],
-      ),
+        const Divider(),
+      ],
     );
   }
 }

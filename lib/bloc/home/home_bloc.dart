@@ -47,8 +47,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       final books = await _booksService.fetchFamousBooks(event.searchQuery);
 
-      print("${books.totalItems} => TOTAL ITEMS");
-
       if (books.totalItems == 0) {
         return emit(state.copyWith(status: HomeStatus.empty));
       }

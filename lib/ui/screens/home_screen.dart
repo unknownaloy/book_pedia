@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MaterialPageRoute<void>(
                                           builder: (BuildContext context) =>
                                               DetailsScreen(
-                                            bookVolumeInfo: book.bookVolumeInfo,
+                                                bookItem: book,
                                           ),
                                         ),
                                       );

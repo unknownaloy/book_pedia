@@ -1,6 +1,7 @@
 import 'package:book_pedia/bloc/authentication/authentication_event.dart';
 import 'package:book_pedia/bloc/authentication/authentication_state.dart';
 import 'package:book_pedia/services/auth_service.dart';
+import 'package:book_pedia/utilities/global.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthenticationBloc
@@ -32,6 +33,7 @@ class AuthenticationBloc
 
       if (isSignedIn) {
         final bookUser = _authService.getUser();
+        Global.bookUser = bookUser;
         yield Authenticated(bookUser: bookUser);
       } else {
         yield Unauthenticated();
