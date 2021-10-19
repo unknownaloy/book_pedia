@@ -6,15 +6,15 @@ books information.
 ## Getting Started
 
 #### Get API key from Google Books API
-- Create a folder in the PROJECT_NAME/lib called **api_keys**
-- Create a dart file **books_api.dart** 
-- Inside the **books_api.dart** paste your API key **const String clientId = PASTE YOUR API KEY HERE**
-- Run **flutter pub get** to get dependencies
-- Run **flutter run** to build the project on your emulator
+- Create a folder in the PROJECT_NAME/lib called ***api_keys***
+- Create a dart file ***books_api.dart*** 
+- Inside the ***books_api.dart*** paste your API key ***const String clientId = PASTE YOUR API KEY HERE***
+- Run ***flutter pub get*** to get dependencies
+- Run ***flutter run*** to build the project on your emulator
 
 [Download Book Pedia for Android](https://github.com/unknownaloy/book_pedia/blob/master/apk/book_pedia.apk)
 
-<img alt="Screenshot of the login screen" src="https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR/view?usp=sharing" height="640">
+![Screenshot of the login screen](https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR/view?usp=sharing "Login Screen")
 
 <img alt="Screenshot of the home screen" src="https://drive.google.com/file/d/1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf/view?usp=sharing" height="640"> 
 
