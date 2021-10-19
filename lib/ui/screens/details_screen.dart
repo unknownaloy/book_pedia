@@ -1,4 +1,3 @@
-import 'package:book_pedia/bloc/authentication/authentication_bloc.dart';
 import 'package:book_pedia/bloc/details/details.event.dart';
 import 'package:book_pedia/bloc/details/details.state.dart';
 import 'package:book_pedia/bloc/details/details_bloc.dart';

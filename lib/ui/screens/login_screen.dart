@@ -131,10 +131,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   )),
                                   autocorrect: true,
                                   obscureText: _obscurePassword,
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
                                   validator: (value) {
-                                    return Validators.validatePassword(value);
+                                    if (value == "" || value == null) {
+                                      return "Password is required";
+                                    }
+                                    return null;
                                   },
                                 ),
                                 const SizedBox(

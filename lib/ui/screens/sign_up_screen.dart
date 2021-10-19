@@ -1,7 +1,5 @@
 import 'package:book_pedia/bloc/authentication/authentication_bloc.dart';
 import 'package:book_pedia/bloc/authentication/authentication_event.dart';
-import 'package:book_pedia/bloc/login/login_bloc.dart';
-import 'package:book_pedia/bloc/login/login_event.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_bloc.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_event.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_state.dart';

@@ -1,16 +1,24 @@
-# book_pedia
+# BOOK PEDIA
 
-A new Flutter project.
+An app that utilizes the Google Books API to allow users to search and retrieve searched
+books information.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+#### Get API key from Google Books API
+* Create a folder in the PROJECT_NAME/lib called **api_keys**
+* Create a dart file *books_api.dart* 
+* Inside the *books_api.dart* paste your API key *const String clientId = "PASTE YOUR API KEY HERE";*
+* Run *flutter pub get* to get dependencies
+* Run *flutter run* to build the project on your emulator
 
-A few resources to get you started if this is your first Flutter project:
+[Download Book Pedia for Android](https://github.com/unknownaloy/postly/raw/Ellis/apk/book_pedia.apk)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR/view?usp=sharing" height="640">
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf/view?usp=sharing" height="640"> 
+
+<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1KaVAMHl3iaekGoeossGb53jFf2vAbB54/view?usp=sharing" height="640"> 
+
+<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1rqezYVlJ0pGeVcW0y4xP7HAZe3mh063r/view?usp=sharing" height="640"> 
+

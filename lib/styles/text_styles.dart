@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final kHeadLine1Style = GoogleFonts.poppins(
-  fontSize: 40.0,
+  fontSize: 44.0,
   fontWeight: FontWeight.w700,
 );
 
