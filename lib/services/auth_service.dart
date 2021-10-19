@@ -4,9 +4,11 @@ import 'package:book_pedia/models/book_user.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:book_pedia/utilities/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<BookUser?> signInWithEmailAndPassword({
     required String email,
@@ -35,6 +37,38 @@ class AuthService {
     }
   }
 
+  Future<BookUser?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleUser!.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      await _auth.signInWithCredential(credential);
+
+      User? currentUser = _auth.currentUser;
+
+      if (currentUser != null) {
+        BookUser bookUser = BookUser(
+          id: currentUser.uid,
+          email: currentUser.email,
+        );
+
+        return bookUser;
+      }
+    } on FirebaseAuthException catch (e) {
+      throw Failure(e.message ?? kFirebaseAuthExceptionMessage);
+    } on SocketException {
+      throw Failure(kSocketExceptionMessage);
+    } catch (e) {
+      throw Failure(kCatchErrorMessage);
+    }
+  }
+
   Future<BookUser?> signUpWithEmailAndPassword({
     required String email,
     required String password,
@@ -46,7 +80,7 @@ class AuthService {
 
       BookUser? bookUser = BookUser(id: user?.uid, email: user?.email);
       return bookUser;
-    } on FirebaseException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw Failure("The password provided is too weak");
       } else if (e.code == 'email-already-in-use') {
@@ -72,6 +106,7 @@ class AuthService {
   }
 
   Future<void> logOut() async {
+    await _googleSignIn.signOut();
     await _auth.signOut();
   }
 }

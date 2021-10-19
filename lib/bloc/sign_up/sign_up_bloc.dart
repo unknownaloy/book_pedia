@@ -1,6 +1,7 @@
 import 'package:book_pedia/bloc/sign_up/sign_up_event.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_state.dart';
 import 'package:book_pedia/services/auth_service.dart';
+import 'package:book_pedia/utilities/failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
@@ -17,6 +18,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         email: event.email,
         password: event.password,
       );
+    } else if (event is SignUpWithGoogle) {
+      yield* _mapSignUpWithGoogle();
     }
   }
 
@@ -35,8 +38,24 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       } else {
         yield const SignUpFailure(error: "Something went wrong. Try again");
       }
-    } catch (e) {
-      yield const SignUpFailure(error: "Try again");
+    } on Failure catch (e) {
+      yield SignUpFailure(error: e.message);
+    }
+  }
+
+  Stream<SignUpState> _mapSignUpWithGoogle() async* {
+    yield SignUpLoading();
+
+    try {
+      final bookUser = await _authService.signInWithGoogle();
+
+      if (bookUser != null) {
+        yield SignUpSuccess();
+      } else {
+        yield const SignUpFailure(error: "Something went wrong. Try again");
+      }
+    } on Failure catch (e) {
+      yield SignUpFailure(error: e.message);
     }
   }
 }

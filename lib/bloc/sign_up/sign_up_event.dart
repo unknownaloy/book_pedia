@@ -16,3 +16,5 @@ class SignUpWithEmailPressed extends SignUpEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+class SignUpWithGoogle extends SignUpEvent {}

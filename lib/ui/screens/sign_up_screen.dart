@@ -1,5 +1,7 @@
 import 'package:book_pedia/bloc/authentication/authentication_bloc.dart';
 import 'package:book_pedia/bloc/authentication/authentication_event.dart';
+import 'package:book_pedia/bloc/login/login_bloc.dart';
+import 'package:book_pedia/bloc/login/login_event.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_bloc.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_event.dart';
 import 'package:book_pedia/bloc/sign_up/sign_up_state.dart';
@@ -14,14 +16,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpScreenState extends State<SignUpScreen> {
   late SignUpBloc _signUpBloc;
   final _authService = AuthService();
 
@@ -67,6 +69,7 @@ class _SignUpState extends State<SignUp> {
 
               if (state is SignUpSuccess) {
                 BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
+                Navigator.pop(context);
               }
             },
             builder: (context, state) {
@@ -193,6 +196,9 @@ class _SignUpState extends State<SignUp> {
                                     ],
                                   ),
                                   buttonColor: kBaseColor,
+                                  onPressed: () {
+                                    _signUpBloc.add(SignUpWithGoogle());
+                                  },
                                 ),
                               ],
                             ),

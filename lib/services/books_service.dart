@@ -31,7 +31,7 @@ class BooksService {
 
         return books;
       } else {
-        throw Exception("Couldn't get data");
+        throw Exception();
       }
     } on SocketException catch (_) {
       throw Failure(kSocketExceptionMessage);

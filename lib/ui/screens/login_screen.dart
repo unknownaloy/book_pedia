@@ -8,7 +8,7 @@ import 'package:book_pedia/styles/colors.dart';
 import 'package:book_pedia/styles/text_field_style.dart';
 import 'package:book_pedia/ui/components/button.dart';
 import 'package:book_pedia/ui/components/loading_indicator.dart';
-import 'package:book_pedia/ui/screens/sign_up.dart';
+import 'package:book_pedia/ui/screens/sign_up_screen.dart';
 import 'package:book_pedia/utilities/validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       context,
                                       MaterialPageRoute<void>(
                                         builder: (BuildContext context) =>
-                                            const SignUp(),
+                                            const SignUpScreen(),
                                       ),
                                     );
                                   },
@@ -211,6 +211,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ],
                                   ),
                                   buttonColor: kBaseColor,
+                                  onPressed: () {
+                                    _loginBloc.add(
+                                      LoginInWithGoogle(),
+                                    );
+                                  },
                                 ),
                               ],
                             ),

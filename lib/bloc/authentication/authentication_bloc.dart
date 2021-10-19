@@ -46,6 +46,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapLoggedInToState(
       AuthenticationEvent event) async* {
     final bookUser = _authService.getUser();
+    Global.bookUser = bookUser;
     yield Authenticated(bookUser: bookUser);
   }
 

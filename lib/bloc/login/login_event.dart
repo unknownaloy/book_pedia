@@ -18,3 +18,5 @@ class LoginInWithEmailPressed extends LoginEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+class LoginInWithGoogle extends LoginEvent {}

@@ -1,6 +1,8 @@
 import 'package:book_pedia/bloc/login/login_event.dart';
 import 'package:book_pedia/bloc/login/login_state.dart';
 import 'package:book_pedia/services/auth_service.dart';
+import 'package:book_pedia/utilities/failure.dart';
+import 'package:book_pedia/utilities/global.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -17,7 +19,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         email: event.email,
         password: event.password,
       );
+    } else if (event is LoginInWithGoogle) {
+      yield* _mapLoginInWithGoogleToState();
     }
+
   }
 
   Stream<LoginState> _mapLoginInWithEmailPressedToState({
@@ -37,9 +42,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else {
         yield const LoginFailure(error: "Something went wrong. Try again");
       }
-    } catch (e) {
-      // Handle error here
-      yield const LoginFailure(error: "Try again");
+    } on Failure catch (e) {
+      yield LoginFailure(error: e.message);
+    }
+  }
+
+  Stream<LoginState> _mapLoginInWithGoogleToState() async* {
+    yield LoginLoading();
+
+    try {
+      final bookUser = await _authService.signInWithGoogle();
+
+      if (bookUser != null) {
+        yield LoginSuccess();
+      } else {
+        yield const LoginFailure(error: "Something went wrong. Try again");
+      }
+    } on Failure catch (e) {
+      yield LoginFailure(error: e.message);
     }
   }
 }
