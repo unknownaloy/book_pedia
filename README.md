@@ -12,13 +12,13 @@ books information.
 * Run *flutter pub get* to get dependencies
 * Run *flutter run* to build the project on your emulator
 
-[Download Book Pedia for Android](https://github.com/unknownaloy/postly/raw/Ellis/apk/book_pedia.apk)
+[Download Book Pedia for Android](https://github.com/unknownaloy/book_pedia/blob/master/apk/book_pedia.apk)
 
-<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR/view?usp=sharing" height="640">
+<img alt="Screenshot of the login screen" src="https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR/view?usp=sharing" height="640">
 
-<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf/view?usp=sharing" height="640"> 
+<img alt="Screenshot of the home screen" src="https://drive.google.com/file/d/1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf/view?usp=sharing" height="640"> 
 
-<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1KaVAMHl3iaekGoeossGb53jFf2vAbB54/view?usp=sharing" height="640"> 
+<img alt="Screenshot of the details screen" src="https://drive.google.com/file/d/1KaVAMHl3iaekGoeossGb53jFf2vAbB54/view?usp=sharing" height="640"> 
 
-<img alt="Screenshot of the create post screen" src="https://drive.google.com/file/d/1rqezYVlJ0pGeVcW0y4xP7HAZe3mh063r/view?usp=sharing" height="640"> 
+<img alt="Screenshot of the drawer" src="https://drive.google.com/file/d/1rqezYVlJ0pGeVcW0y4xP7HAZe3mh063r/view?usp=sharing" height="640"> 
 
