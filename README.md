@@ -14,11 +14,11 @@ books information.
 
 [Download Book Pedia for Android](https://github.com/unknownaloy/book_pedia/blob/master/apk/book_pedia.apk)
 
-![Screenshot of the login screen](https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR/view?usp=sharing "Login Screen")
+![Screenshot of the login screen](https://drive.google.com/file/d/1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR "Login Screen")
 
-<img alt="Screenshot of the home screen" src="https://drive.google.com/file/d/1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf/view?usp=sharing" height="640"> 
+<img alt="Screenshot of the home screen" src="https://drive.google.com/file/d/1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf" height="640"> 
 
-<img alt="Screenshot of the details screen" src="https://drive.google.com/file/d/1KaVAMHl3iaekGoeossGb53jFf2vAbB54/view?usp=sharing" height="640"> 
+<img alt="Screenshot of the details screen" src="https://drive.google.com/file/d/1KaVAMHl3iaekGoeossGb53jFf2vAbB54" height="640"> 
 
-<img alt="Screenshot of the drawer" src="https://drive.google.com/file/d/1rqezYVlJ0pGeVcW0y4xP7HAZe3mh063r/view?usp=sharing" height="640"> 
+<img alt="Screenshot of the drawer" src="https://drive.google.com/file/d/1rqezYVlJ0pGeVcW0y4xP7HAZe3mh063r" height="640"> 
 
