@@ -57,5 +57,10 @@
     "hi": "Hi",
     "@hi": {
         "description": "Greeting"
+    },
+
+    "famousBooks": "Famous Books",
+    "@famousBooks": {
+        "description": "Popular books gotten from Google Books API"
     }
  }

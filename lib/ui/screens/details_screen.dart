@@ -65,11 +65,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         widget.bookItem.bookVolumeInfo.title,
                         style: Theme.of(context).textTheme.headline3,
                       ),
-                      background: Image.network(
-                        widget.bookItem.bookVolumeInfo.bookImages
-                                ?.mainThumbnail ??
-                            "https://www.w3schools.com/w3images/avatar6.png",
-                        fit: BoxFit.cover,
+                      background: Hero(
+                        tag: widget.bookItem.id,
+                        child: Image.network(
+                          widget.bookItem.bookVolumeInfo.bookImages
+                                  ?.mainThumbnail ??
+                              "https://www.w3schools.com/w3images/avatar6.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),

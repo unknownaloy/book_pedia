@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:book_pedia/api_keys/books_api.dart';
 import 'package:book_pedia/models/book_model/books.dart';
+import 'package:book_pedia/utilities/failure.dart';
+import 'package:book_pedia/utilities/strings.dart';
 import 'package:http/http.dart' as http;
 
 class BooksService {
@@ -26,15 +29,16 @@ class BooksService {
 
         Books books = Books.fromJson(decodedData);
 
-        print("$books == FROM SERVICE METHOD");
-
         return books;
       } else {
         throw Exception("Couldn't get data");
       }
+    } on SocketException catch (_) {
+      throw Failure(kSocketExceptionMessage);
+    } on HttpException {
+      throw Failure(kHttpExceptionMessage);
     } catch (e) {
-      print("$e => FROM FETCH DATA");
-      throw Exception("Something went wrong. Please try again");
+      throw Failure(kCatchErrorMessage);
     }
   }
 }

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:book_pedia/models/book_user.dart';
+import 'package:book_pedia/utilities/failure.dart';
+import 'package:book_pedia/utilities/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -25,9 +27,11 @@ class AuthService {
       );
       return bookUser;
     } on FirebaseException catch (e) {
-      // Handle firebase exceptions here
-    } catch (e) {
-      // Handle other exceptions here
+      throw Failure(e.message ?? kFirebaseExceptionMessage);
+    } on SocketException {
+      throw Failure(kSocketExceptionMessage);
+    } catch (_) {
+      throw Failure(kCatchErrorMessage);
     }
   }
 
@@ -44,14 +48,14 @@ class AuthService {
       return bookUser;
     } on FirebaseException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        throw Failure("The password provided is too weak");
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        throw Failure("The account already exists for that email");
       }
     } on SocketException {
-      throw Exception("No internet connection");
-    } catch (e) {
-      throw Exception("Something went wrong");
+      throw Failure(kSocketExceptionMessage);
+    } catch (_) {
+      throw Failure(kSocketExceptionMessage);
     }
   }
 

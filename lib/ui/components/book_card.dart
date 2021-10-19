@@ -7,6 +7,7 @@ class BookCard extends StatelessWidget {
   final String? bookAuthor;
   final double? bookRating;
   final String? category;
+  final Object heroTag;
   final VoidCallback onTap;
 
   const BookCard({
@@ -16,6 +17,7 @@ class BookCard extends StatelessWidget {
     this.bookAuthor,
     this.bookRating,
     this.category,
+    required this.heroTag,
     required this.onTap,
   }) : super(key: key);
 
@@ -44,15 +46,21 @@ class BookCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16.0),
-                  child: Image.network(
-                    imageUrl ?? "https://www.w3schools.com/w3images/avatar6.png",
-                    fit: BoxFit.contain,
-                    width: 104.0,
-                    loadingBuilder: (context, child, progress) {
-                      return progress == null
-                          ? child
-                          : const CircularProgressIndicator();
-                    },
+                  child: Hero(
+                    tag: heroTag,
+                    child: Image.network(
+                      imageUrl ?? "https://www.w3schools.com/w3images/avatar6.png",
+                      fit: BoxFit.contain,
+                      width: 104.0,
+                      loadingBuilder: (context, child, progress) {
+                        return progress == null
+                            ? child
+                            : const CircularProgressIndicator();
+                      },
+                      errorBuilder: (context, child, progress) {
+                        return const Icon(Icons.error);
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:book_pedia/bloc/authentication/authentication_bloc.dart';
 import 'package:book_pedia/bloc/authentication/authentication_event.dart';
 import 'package:book_pedia/styles/colors.dart';
+import 'package:book_pedia/ui/screens/favorite_screen.dart';
 import 'package:book_pedia/utilities/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,15 @@ class HomeDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) =>
+                      const FavoriteScreen(),
+                    ),
+                  );
+                },
                 title: Text(
                   AppLocalizations.of(context)!.favorites,
                   style: Theme.of(context).textTheme.bodyText1,

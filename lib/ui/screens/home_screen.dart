@@ -3,9 +3,8 @@ import 'package:book_pedia/bloc/home/home_event.dart';
 import 'package:book_pedia/bloc/home/home_state.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/styles/colors.dart';
-import 'package:book_pedia/ui/components/book_card.dart';
+import 'package:book_pedia/ui/components/book_items_list_view.dart';
 import 'package:book_pedia/ui/components/home_drawer.dart';
-import 'package:book_pedia/ui/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -122,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   bloc: _homeBloc,
                   builder: (context, state) {
                     if (state.status == HomeStatus.failure) {
-                      return const Text("Something went wrong");
+                      return Text(state.errorMessage!);
                     }
 
                     if (state.status == HomeStatus.empty) {
@@ -132,50 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (state.status == HomeStatus.success) {
                       final bookItems = state.books!.bookItem;
                       return Expanded(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                state.homeType == HomeType.famous
-                                    ? "Famous Books"
-                                    : _searchController.text.trim(),
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 24.0,
-                            ),
-                            Expanded(
-                              child: ListView.builder(
-                                itemCount: bookItems!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final book = bookItems[index];
-                                  return BookCard(
-                                    imageUrl: book.bookVolumeInfo.bookImages
-                                        ?.smallThumbnail,
-                                    bookTitle: book.bookVolumeInfo.title,
-                                    bookAuthor:
-                                        book.bookVolumeInfo.authors?.join(", "),
-                                    bookRating: book.bookVolumeInfo.rating,
-                                    category:
-                                        book.bookVolumeInfo.categories?[0],
-                                    onTap: () {
-                                      Navigator.push<void>(
-                                        context,
-                                        MaterialPageRoute<void>(
-                                          builder: (BuildContext context) =>
-                                              DetailsScreen(
-                                            bookItem: book,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                        child: BookItemsListView(
+                          label: state.homeType == HomeType.famous
+                              ? AppLocalizations.of(context)!.famousBooks
+                              : _searchController.text.trim(),
+                          bookItems: bookItems!,
                         ),
                       );
                     }
