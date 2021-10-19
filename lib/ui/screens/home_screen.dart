@@ -4,7 +4,9 @@ import 'package:book_pedia/bloc/home/home_state.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/styles/colors.dart';
 import 'package:book_pedia/ui/components/book_items_list_view.dart';
+import 'package:book_pedia/ui/components/message_display.dart';
 import 'package:book_pedia/ui/components/home_drawer.dart';
+import 'package:book_pedia/ui/components/shimmers/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -121,15 +123,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   bloc: _homeBloc,
                   builder: (context, state) {
                     if (state.status == HomeStatus.failure) {
-                      return Text(state.errorMessage!);
+
+                      return Expanded(
+                        child: MessageDisplay(error: state.errorMessage!),
+                      );
                     }
 
                     if (state.status == HomeStatus.empty) {
-                      return const Text("No result found");
+                      return Expanded(
+                        child: MessageDisplay(error: AppLocalizations.of(context)!.noResultFound),
+                      );
                     }
 
                     if (state.status == HomeStatus.success) {
                       final bookItems = state.books!.bookItem;
+
                       return Expanded(
                         child: BookItemsListView(
                           label: state.homeType == HomeType.famous
@@ -140,7 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }
 
-                    return const Text("Loading...");
+                    return const Expanded(
+                      child: LoadingShimmer(),
+                    );
                   },
                 ),
               ],

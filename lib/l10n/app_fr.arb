@@ -23,5 +23,7 @@
 
   "hi": "salut",
 
-  "famousBooks": "Livres célèbres"
+  "famousBooks": "Livres célèbres",
+
+  "noResultFound": "Aucun résultat trouvé"
 }

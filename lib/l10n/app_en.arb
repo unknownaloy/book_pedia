@@ -62,5 +62,10 @@
     "famousBooks": "Famous Books",
     "@famousBooks": {
         "description": "Popular books gotten from Google Books API"
+    },
+
+    "noResultFound": "No result found",
+    "@noResultFound": {
+        "description": "Message to show empty data"
     }
  }

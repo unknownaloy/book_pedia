@@ -3,8 +3,11 @@ import 'package:book_pedia/bloc/favorite/favorite_event.dart';
 import 'package:book_pedia/bloc/favorite/favorite_state.dart';
 import 'package:book_pedia/services/database_service.dart';
 import 'package:book_pedia/ui/components/book_items_list_view.dart';
+import 'package:book_pedia/ui/components/message_display.dart';
+import 'package:book_pedia/ui/components/shimmers/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -14,10 +17,8 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-
   late FavoriteBloc _favoriteBloc;
   final _databaseService = DatabaseService();
-
 
   @override
   void initState() {
@@ -43,27 +44,28 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         body: BlocProvider(
           create: (context) => _favoriteBloc,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
             child: BlocBuilder<FavoriteBloc, FavoriteState>(
               builder: (context, state) {
-
                 if (state is FavoritesEmpty) {
-                  return const Text("Nothing to display");
+                  return MessageDisplay(error: AppLocalizations.of(context)!.noResultFound);
                 }
 
                 if (state is FavoritesFailure) {
-                  print("FavoriteScreen => FavoritesFailure == ${state.errorMessage}");
-                  return Text("SOMETHING WENT WRONG");
+                  return MessageDisplay(
+                    error: state.errorMessage,
+                  );
                 }
 
                 if (state is FavoritesSuccess) {
                   return BookItemsListView(
-                    label: "Favorites",
+                    label: AppLocalizations.of(context)!.favorites,
                     bookItems: state.bookItems,
                   );
                 }
 
-                return const Text("Loading...");
+                return const LoadingShimmer();
               },
             ),
           ),

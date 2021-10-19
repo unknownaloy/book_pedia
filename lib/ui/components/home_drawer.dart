@@ -29,6 +29,9 @@ class HomeDrawer extends StatelessWidget {
               ),
               ListTile(
                 onTap: () {
+
+                  Navigator.pop(context);
+
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(

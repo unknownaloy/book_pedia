@@ -49,7 +49,8 @@ class BookCard extends StatelessWidget {
                   child: Hero(
                     tag: heroTag,
                     child: Image.network(
-                      imageUrl ?? "https://www.w3schools.com/w3images/avatar6.png",
+                      imageUrl ??
+                          "https://www.w3schools.com/w3images/avatar6.png",
                       fit: BoxFit.contain,
                       width: 104.0,
                       loadingBuilder: (context, child, progress) {
@@ -58,7 +59,10 @@ class BookCard extends StatelessWidget {
                             : const CircularProgressIndicator();
                       },
                       errorBuilder: (context, child, progress) {
-                        return const Icon(Icons.error);
+                        return const Icon(
+                          Icons.error,
+                          color: kTextColor,
+                        );
                       },
                     ),
                   ),
