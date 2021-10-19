@@ -12,7 +12,7 @@ books information.
 - Run ***flutter pub get*** to get dependencies
 - Run ***flutter run*** to build the project on your emulator
 
-[Download Book Pedia for Android](https://github.com/unknownaloy/book_pedia/blob/master/apk/book_pedia.apk)
+[Download Book Pedia for Android](https://github.com/unknownaloy/book_pedia/raw/master/apk/book_pedia.apk)
 
 <img alt="Screenshot of the login screen" src="https://drive.google.com/uc?export=view&id=1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR" height="640">
 
