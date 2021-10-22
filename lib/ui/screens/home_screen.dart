@@ -46,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
         body: BlocProvider(
           create: (context) => _homeBloc,
           child: NestedScrollView(
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverOverlapAbsorber(
                   handle:
@@ -54,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   sliver: SliverAppBar(
                     pinned: false,
                     floating: true,
-                    // snap: true,
                     title: Text(
                       "Book Pedia",
                       style: Theme.of(context).textTheme.headline6,
@@ -65,9 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   sliver: SliverToBoxAdapter(
                     child:
+
                         /// App's slogan
                         Text(
-                      AppLocalizations.of(context)!.exploreThousandsOfBooksOnTheGo,
+                      AppLocalizations.of(context)!
+                          .exploreThousandsOfBooksOnTheGo,
                       style: Theme.of(context).textTheme.headline2,
                     ),
                   ),
