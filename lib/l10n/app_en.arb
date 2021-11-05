@@ -4,6 +4,11 @@
         "description": "Clickable text the user should use if they already have an account"
     },
 
+    "confirmPassword": "Confirm password",
+    "@confirmPassword": {
+        "description": "Confirm password message"
+    },
+
     "createAnAccount": "Create an Account",
     "@createAnAccount": {
         "description": "The sign up instruction text"

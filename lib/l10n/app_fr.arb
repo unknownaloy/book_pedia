@@ -1,6 +1,8 @@
 {
   "alreadyHaveAnAccount": "Vous avez déjà un compte",
 
+  "confirmPassword": "Confirmez le mot de passe",
+
   "createAnAccount": "Créer un compte",
 
   "dontHaveAnAccount": "Vous n'avez pas de compte ?",

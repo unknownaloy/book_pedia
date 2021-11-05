@@ -94,12 +94,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
+                                /// Email address
                                 TextFormField(
                                   controller: _emailController,
                                   style: Theme.of(context).textTheme.bodyText1,
                                   decoration: inputDecoration(
-                                      AppLocalizations.of(context)!
-                                          .emailAddress),
+                                    AppLocalizations.of(context)!.emailAddress,
+                                  ),
                                   keyboardType: TextInputType.emailAddress,
                                   autocorrect: false,
                                   validator: (value) {
@@ -109,14 +110,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const SizedBox(
                                   height: 24.0,
                                 ),
+
+                                /// Password
                                 TextFormField(
                                   controller: _passwordController,
                                   style: Theme.of(context).textTheme.bodyText1,
                                   decoration: inputDecoration(
-                                          AppLocalizations.of(context)!
-                                              .password)
-                                      .copyWith(
-                                          suffixIcon: IconButton(
+                                    AppLocalizations.of(context)!.password,
+                                  ).copyWith(
+                                      suffixIcon: IconButton(
                                     onPressed: () {
                                       setState(() =>
                                           _obscurePassword = !_obscurePassword);
@@ -136,6 +138,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
                                     return Validators.validatePassword(value);
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 24.0,
+                                ),
+
+                                /// Confirm password
+                                TextFormField(
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                  decoration: inputDecoration(
+                                    AppLocalizations.of(context)!.confirmPassword,
+                                  ).copyWith(
+                                      suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() =>
+                                          _obscurePassword = !_obscurePassword);
+                                    },
+                                    icon: Icon(
+                                      _obscurePassword
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: _obscurePassword
+                                          ? kHintColor
+                                          : kAccentColor,
+                                    ),
+                                  )),
+                                  autocorrect: true,
+                                  obscureText: _obscurePassword,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    if (value == null || value == "") {
+                                      return "Please enter password";
+                                    }
+
+                                    if (value != _passwordController.text) {
+                                      return "Password don't match";
+                                    }
+                                    return null;
                                   },
                                 ),
                                 const SizedBox(
