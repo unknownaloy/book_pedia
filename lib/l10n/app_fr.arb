@@ -1,29 +1,31 @@
 {
-  "createAnAccount": "Créer un compte",
-
-  "logIn": "Connexion",
-
-  "signUp": "Sign up",
-
-  "emailAddress": "Adresse e-mail",
-
-  "password": "Mot de passe",
-
   "alreadyHaveAnAccount": "Vous avez déjà un compte",
+
+  "createAnAccount": "Créer un compte",
 
   "dontHaveAnAccount": "Vous n'avez pas de compte ?",
 
+  "emailAddress": "Adresse e-mail",
+
   "exploreThousandsOfBooksOnTheGo": "Explorez des milliers de livres en déplacement",
-
-  "searchForBooks": "Recherche de livres...",
-
-  "favorites": "Favoris",
-
-  "logout": "Se déconnecter",
-
-  "hi": "salut",
 
   "famousBooks": "Livres célèbres",
 
-  "noResultFound": "Aucun résultat trouvé"
+  "favorites": "Favoris",
+
+  "forgotPassword": "Mot de passe oublié ?",
+
+  "hi": "salut",
+
+  "logIn": "Connexion",
+
+  "logout": "Se déconnecter",
+
+  "password": "Mot de passe",
+
+  "noResultFound": "Aucun résultat trouvé",
+
+  "searchForBooks": "Recherche de livres...",
+
+  "signUp": "Sign up"
 }

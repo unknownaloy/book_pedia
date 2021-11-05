@@ -1,32 +1,12 @@
  {
-    "createAnAccount": "Create an Account",
-    "@createAnAccount": {
-        "description": "The sign up instruction text"
-    },
-
-    "logIn": "Log in",
-    "@logIn": {
-        "description": "Log in text"
-    },
-
-    "signUp": "Sign up",
-    "@signUp": {
-        "description": "Sign up"
-    },
-
-    "emailAddress": "Email Address",
-    "@emailAddress": {
-        "description": "Electronic mail"
-    },
-
-    "password": "Password",
-    "@password": {
-        "description": "User's password"
-    },
-
     "alreadyHaveAnAccount": "Already have an account",
     "@alreadyHaveAnAccount": {
         "description": "Clickable text the user should use if they already have an account"
+    },
+
+    "createAnAccount": "Create an Account",
+    "@createAnAccount": {
+        "description": "The sign up instruction text"
     },
 
     "dontHaveAnAccount": "Don't have an account?",
@@ -34,29 +14,14 @@
         "description": "Don't have an account with the app"
     },
 
+    "emailAddress": "Email Address",
+    "@emailAddress": {
+        "description": "Electronic mail"
+    },
+
     "exploreThousandsOfBooksOnTheGo": "Explore thousands of books on the go",
     "@exploreThousandsOfBooksOnTheGo": {
         "description": "Catchy welcome phrase on exploring books through the app"
-    },
-
-    "searchForBooks": "Search for books...",
-    "@searchForBooks": {
-        "description": "Placeholder text in the search field"
-    },
-
-    "favorites": "Favorites",
-    "@favorites": {
-        "description": "List tile widget for navigating to the user's favorite screen"
-    },
-
-    "logout": "Logout",
-    "@logout": {
-        "description": "List tile widget for logging out from the app"
-    },
-
-    "hi": "Hi",
-    "@hi": {
-        "description": "Greeting"
     },
 
     "famousBooks": "Famous Books",
@@ -64,8 +29,48 @@
         "description": "Popular books gotten from Google Books API"
     },
 
+    "favorites": "Favorites",
+    "@favorites": {
+        "description": "List tile widget for navigating to the user's favorite screen"
+    },
+
+    "forgotPassword": "Forgot password ?",
+    "@forgotPassword": {
+        "description": "Clickable message for forgot account password"
+    },
+
+    "hi": "Hi",
+    "@hi": {
+        "description": "Greeting"
+    },
+
+    "logIn": "Log in",
+    "@logIn": {
+        "description": "Log in text"
+    },
+
+    "logout": "Logout",
+    "@logout": {
+        "description": "List tile widget for logging out from the app"
+    },
+
+    "password": "Password",
+    "@password": {
+        "description": "User's password"
+    },
+
     "noResultFound": "No result found",
     "@noResultFound": {
         "description": "Message to show empty data"
+    },
+
+    "searchForBooks": "Search for books...",
+    "@searchForBooks": {
+        "description": "Placeholder text in the search field"
+    },
+
+    "signUp": "Sign up",
+    "@signUp": {
+        "description": "Sign up"
     }
  }

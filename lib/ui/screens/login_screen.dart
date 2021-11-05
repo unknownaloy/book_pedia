@@ -112,23 +112,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                   controller: _passwordController,
                                   style: Theme.of(context).textTheme.bodyText1,
                                   decoration: inputDecoration(
-                                          AppLocalizations.of(context)!
-                                              .password)
-                                      .copyWith(
-                                          suffixIcon: IconButton(
-                                    onPressed: () {
-                                      setState(() =>
-                                          _obscurePassword = !_obscurePassword);
-                                    },
-                                    icon: Icon(
-                                      _obscurePassword
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: _obscurePassword
-                                          ? kHintColor
-                                          : kAccentColor,
+                                    AppLocalizations.of(context)!.password,
+                                  ).copyWith(
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() => _obscurePassword =
+                                            !_obscurePassword);
+                                      },
+                                      icon: Icon(
+                                        _obscurePassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: _obscurePassword
+                                            ? kHintColor
+                                            : kAccentColor,
+                                      ),
                                     ),
-                                  )),
+                                  ),
                                   autocorrect: true,
                                   obscureText: _obscurePassword,
                                   validator: (value) {
@@ -141,6 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SizedBox(
                                   height: 28.0,
                                 ),
+
+                                /// Login button
                                 Button(
                                   child: Text(
                                     AppLocalizations.of(context)!.logIn,
@@ -158,6 +160,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                   },
                                 ),
+
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      AppLocalizations.of(context)!.forgotPassword,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2,
+                                    ),
+                                  ),
+                                ),
+
                                 const SizedBox(
                                   height: 24.0,
                                 ),
