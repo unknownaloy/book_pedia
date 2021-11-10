@@ -11,9 +11,13 @@ class BookItem extends Equatable {
   @JsonKey(name: "volumeInfo")
   final BookVolumeInfo bookVolumeInfo;
 
-  const BookItem({
-     required this.id,
-     required this.bookVolumeInfo,
+  @JsonKey(defaultValue: false)
+  bool isFavorite;
+
+   BookItem({
+    required this.id,
+    required this.bookVolumeInfo,
+    required this.isFavorite,
   });
 
   @override

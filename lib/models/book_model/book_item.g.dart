@@ -11,10 +11,12 @@ BookItem _$BookItemFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     bookVolumeInfo:
         BookVolumeInfo.fromJson(json['volumeInfo'] as Map<String, dynamic>),
+    isFavorite: json['isFavorite'] as bool? ?? false,
   );
 }
 
 Map<String, dynamic> _$BookItemToJson(BookItem instance) => <String, dynamic>{
       'id': instance.id,
       'volumeInfo': instance.bookVolumeInfo.toJson(),
+      'isFavorite': instance.isFavorite,
     };

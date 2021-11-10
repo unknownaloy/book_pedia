@@ -29,9 +29,14 @@ class _DetailsScreenState extends State<DetailsScreen>
   late AnimationController _animationController;
   late Animation _animation;
 
+  late bool _isFavorite;
+
   @override
   void initState() {
     super.initState();
+
+    _isFavorite = widget.bookItem.isFavorite;
+
     _detailsBloc = DetailsBloc(databaseService: _databaseService);
     _detailsBloc.add(
       DetailsLaunched(userId: Global.bookUser.id!, bookItem: widget.bookItem),
@@ -168,25 +173,25 @@ class _DetailsScreenState extends State<DetailsScreen>
                 ),
               );
             },
-            child: BlocBuilder<DetailsBloc, DetailsState>(
+            child: BlocListener<DetailsBloc, DetailsState>(
               bloc: _detailsBloc,
-              builder: (context, state) {
-                if (state.favoriteStatus == FavoriteStatus.favorite) {
-                  return const Icon(
-                    Icons.favorite,
-                    color: kTextColor,
-                  );
-                }
-
+              listener: (context, state) {
                 if (state.favoriteStatus == FavoriteStatus.notFavorite) {
-                  return const Icon(
-                    Icons.favorite_border,
-                    color: kTextColor,
-                  );
+                  if (_isFavorite) {
+                    setState(() => _isFavorite = false);
+                  }
                 }
 
-                return const CircularProgressIndicator();
+                if (state.favoriteStatus == FavoriteStatus.favorite) {
+                  if (!_isFavorite) {
+                    setState(() => _isFavorite = true);
+                  }
+                }
               },
+              child: Icon(
+                _isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: kTextColor,
+              ),
             ),
           ),
         ),
