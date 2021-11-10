@@ -4,11 +4,14 @@ import 'package:book_pedia/ui/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 
 class BookItemsListView extends StatelessWidget {
-
   final String label;
   final List<BookItem> bookItems;
 
-  const BookItemsListView({Key? key, required this.label, required this.bookItems,}) : super(key: key);
+  const BookItemsListView({
+    Key? key,
+    required this.label,
+    required this.bookItems,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,8 @@ class BookItemsListView extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(label,
+          child: Text(
+            label,
             style: Theme.of(context).textTheme.headline3,
           ),
         ),
@@ -29,23 +33,19 @@ class BookItemsListView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final book = bookItems[index];
               return BookCard(
-                imageUrl: book.bookVolumeInfo.bookImages
-                    ?.smallThumbnail,
+                imageUrl: book.bookVolumeInfo.bookImages?.smallThumbnail,
                 bookTitle: book.bookVolumeInfo.title,
-                bookAuthor:
-                book.bookVolumeInfo.authors?.join(", "),
+                bookAuthor: book.bookVolumeInfo.authors?.join(", "),
                 bookRating: book.bookVolumeInfo.rating,
-                category:
-                book.bookVolumeInfo.categories?[0],
+                category: book.bookVolumeInfo.categories?[0],
                 heroTag: book.id,
                 onTap: () {
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) =>
-                          DetailsScreen(
-                            bookItem: book,
-                          ),
+                      builder: (BuildContext context) => DetailsScreen(
+                        bookItem: book,
+                      ),
                     ),
                   );
                 },

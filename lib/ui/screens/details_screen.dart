@@ -21,9 +21,13 @@ class DetailsScreen extends StatefulWidget {
   _DetailsScreenState createState() => _DetailsScreenState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _DetailsScreenState extends State<DetailsScreen>
+    with SingleTickerProviderStateMixin {
   late DetailsBloc _detailsBloc;
   final _databaseService = DatabaseService();
+
+  late AnimationController _animationController;
+  late Animation _animation;
 
   @override
   void initState() {
@@ -32,11 +36,25 @@ class _DetailsScreenState extends State<DetailsScreen> {
     _detailsBloc.add(
       DetailsLaunched(userId: Global.bookUser.id!, bookItem: widget.bookItem),
     );
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+
+    _animation = ColorTween(begin: Colors.transparent, end: kTextColor)
+        .animate(_animationController);
+
+    _animationController.addListener(() {
+      print(_animationController.value);
+      print(_animation.value);
+    });
   }
 
   @override
   void dispose() {
     _detailsBloc.close();
+    _animationController.dispose();
     super.dispose();
   }
 
