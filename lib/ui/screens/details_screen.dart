@@ -27,9 +27,11 @@ class _DetailsScreenState extends State<DetailsScreen>
   final _databaseService = DatabaseService();
 
   late AnimationController _animationController;
-  late Animation _animation;
+  late Animation<double> _sizeAnimation;
 
   late bool _isFavorite;
+
+  bool _hasAnimated = false;
 
   @override
   void initState() {
@@ -44,15 +46,26 @@ class _DetailsScreenState extends State<DetailsScreen>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
     );
 
-    _animation = ColorTween(begin: Colors.transparent, end: kTextColor)
-        .animate(_animationController);
+    _sizeAnimation = TweenSequence(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 24, end: 40), weight: 50),
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 40, end: 24), weight: 50),
+    ]).animate(_animationController);
 
-    _animationController.addListener(() {
-      print(_animationController.value);
-      print(_animation.value);
+    _animationController.addListener(() {});
+
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() => _hasAnimated = true);
+      }
+
+      if (status == AnimationStatus.dismissed) {
+        setState(() => _hasAnimated = false);
+      }
     });
   }
 
@@ -166,6 +179,9 @@ class _DetailsScreenState extends State<DetailsScreen>
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              _hasAnimated
+                  ? _animationController.reverse()
+                  : _animationController.forward();
               _detailsBloc.add(
                 FavoriteButtonPressed(
                   userId: Global.bookUser.id!,
@@ -188,9 +204,15 @@ class _DetailsScreenState extends State<DetailsScreen>
                   }
                 }
               },
-              child: Icon(
-                _isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: kTextColor,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, _) {
+                  return Icon(
+                    _isFavorite ? Icons.favorite : Icons.favorite_border,
+                    size: _sizeAnimation.value,
+                    color: kTextColor,
+                  );
+                },
               ),
             ),
           ),

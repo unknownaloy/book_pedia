@@ -30,6 +30,8 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
       return emit(state.copyWith(favoriteStatus: FavoriteStatus.notFavorite));
     }
+
+    return emit(state.copyWith(favoriteStatus: FavoriteStatus.favorite));
   }
 
   void _onFavoriteButtonPressed(
