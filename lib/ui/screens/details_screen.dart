@@ -28,6 +28,7 @@ class _DetailsScreenState extends State<DetailsScreen>
 
   late AnimationController _animationController;
   late Animation<double> _sizeAnimation;
+  late Animation<double> _curve;
 
   late bool _isFavorite;
 
@@ -46,15 +47,18 @@ class _DetailsScreenState extends State<DetailsScreen>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 250),
     );
+
+    _curve =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
 
     _sizeAnimation = TweenSequence(<TweenSequenceItem<double>>[
       TweenSequenceItem<double>(
           tween: Tween<double>(begin: 24, end: 40), weight: 50),
       TweenSequenceItem<double>(
           tween: Tween<double>(begin: 40, end: 24), weight: 50),
-    ]).animate(_animationController);
+    ]).animate(_curve);
 
     _animationController.addListener(() {});
 
@@ -179,15 +183,19 @@ class _DetailsScreenState extends State<DetailsScreen>
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              _hasAnimated
-                  ? _animationController.reverse()
-                  : _animationController.forward();
+              // _hasAnimated
+              //     ? _animationController.reverse()
+              //     : _animationController.forward();
+              _animationController.reset();
+              _animationController.forward();
               _detailsBloc.add(
                 FavoriteButtonPressed(
                   userId: Global.bookUser.id!,
                   bookItem: widget.bookItem,
                 ),
               );
+
+              print("Size animation => ${_sizeAnimation.value}");
             },
             child: BlocListener<DetailsBloc, DetailsState>(
               bloc: _detailsBloc,
