@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   sliver: SliverAppBar(
                     pinned: false,
                     floating: true,
+                    snap: true,
                     title: Text(
                       "Book Pedia",
                       style: Theme.of(context).textTheme.headline6,
