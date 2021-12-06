@@ -36,7 +36,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
   void _onFavoriteButtonPressed(
       FavoriteButtonPressed event, Emitter<DetailsState> emit) async {
-    if (state.favoriteStatus != FavoriteStatus.initial) {
+    if (state.favoriteStatus != FavoriteStatus.idle) {
       if (state.favoriteStatus == FavoriteStatus.favorite) {
         emit(state.copyWith(favoriteStatus: FavoriteStatus.notFavorite));
         return await _databaseService.removeBookItemFromFavorite(

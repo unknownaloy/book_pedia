@@ -1,6 +1,7 @@
 import 'package:book_pedia/bloc/home/home_bloc.dart';
 import 'package:book_pedia/bloc/home/home_event.dart';
 import 'package:book_pedia/bloc/home/home_state.dart';
+import 'package:book_pedia/models/book_model/book_item.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/styles/colors.dart';
 import 'package:book_pedia/ui/components/book_items_list_view.dart';

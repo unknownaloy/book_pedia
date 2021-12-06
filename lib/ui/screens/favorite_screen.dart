@@ -1,6 +1,7 @@
 import 'package:book_pedia/bloc/favorite/favorite_bloc.dart';
 import 'package:book_pedia/bloc/favorite/favorite_event.dart';
 import 'package:book_pedia/bloc/favorite/favorite_state.dart';
+import 'package:book_pedia/enums/request_status.dart';
 import 'package:book_pedia/services/database_service.dart';
 import 'package:book_pedia/ui/components/book_items_list_view.dart';
 import 'package:book_pedia/ui/components/message_display.dart';
@@ -48,20 +49,24 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
             child: BlocBuilder<FavoriteBloc, FavoriteState>(
               builder: (context, state) {
-                if (state is FavoritesEmpty) {
-                  return MessageDisplay(error: AppLocalizations.of(context)!.noResultFound);
+                if (state.status == RequestStatus.empty) {
+                  return MessageDisplay(
+                      error: AppLocalizations.of(context)!.noResultFound);
                 }
 
-                if (state is FavoritesFailure) {
+                if (state.status == RequestStatus.failure) {
                   return MessageDisplay(
-                    error: state.errorMessage,
+                    error: state.errorMessage!,
                   );
                 }
 
-                if (state is FavoritesSuccess) {
+                if (state.status == RequestStatus.success) {
                   return BookItemsListView(
                     label: AppLocalizations.of(context)!.favorites,
-                    bookItems: state.bookItems,
+                    bookItems: state.bookItems!,
+                    onFavoriteHandler: (bookItem) => _favoriteBloc.add(
+                      FavoritePressed(bookItem: bookItem),
+                    ),
                   );
                 }
 

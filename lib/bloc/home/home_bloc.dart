@@ -22,6 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
+  // TODO: Make this nullable to be able to check it's value and decide if making a call to the DB is necessary
   late Books _books;
 
   EventTransformer<HomeEvent> debounce<HomeEvent>(Duration duration) {

@@ -14,8 +14,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsScreen extends StatefulWidget {
   final BookItem bookItem;
+  final Function(BookItem)? onFavorite;
 
-  const DetailsScreen({Key? key, required this.bookItem}) : super(key: key);
+  const DetailsScreen({
+    Key? key,
+    required this.bookItem,
+    this.onFavorite,
+  }) : super(key: key);
 
   @override
   _DetailsScreenState createState() => _DetailsScreenState();
@@ -195,7 +200,10 @@ class _DetailsScreenState extends State<DetailsScreen>
                 ),
               );
 
-              print("Size animation => ${_sizeAnimation.value}");
+              if (widget.onFavorite != null) {
+                print("DetailsScreen => widget.onFavorite is not null");
+                widget.onFavorite!(widget.bookItem);
+              }
             },
             child: BlocListener<DetailsBloc, DetailsState>(
               bloc: _detailsBloc,

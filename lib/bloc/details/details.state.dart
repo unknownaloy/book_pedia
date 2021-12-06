@@ -17,7 +17,7 @@ import 'package:equatable/equatable.dart';
 class DetailsState extends Equatable {
   final FavoriteStatus favoriteStatus;
 
-  const DetailsState({this.favoriteStatus = FavoriteStatus.initial});
+  const DetailsState({this.favoriteStatus = FavoriteStatus.idle});
 
   DetailsState copyWith({FavoriteStatus? favoriteStatus}) {
     return DetailsState(favoriteStatus: favoriteStatus ?? this.favoriteStatus);

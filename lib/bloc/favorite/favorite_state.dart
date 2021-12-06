@@ -1,31 +1,37 @@
+import 'package:book_pedia/enums/favorite_status.dart';
+import 'package:book_pedia/enums/request_status.dart';
 import 'package:book_pedia/models/book_model/book_item.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
-abstract class FavoriteState extends Equatable {
-  const FavoriteState();
+@immutable
+class FavoriteState extends Equatable {
+  final RequestStatus status;
+  final List<BookItem>? bookItems;
+  final String? errorMessage;
+  final FavoriteStatus favoriteStatus;
+
+  const FavoriteState({
+    this.status = RequestStatus.loading,
+    this.bookItems,
+    this.errorMessage,
+    this.favoriteStatus = FavoriteStatus.favorite,
+  });
+
+  FavoriteState copyWith({
+    RequestStatus? status,
+    List<BookItem>? bookItems,
+    String? errorMessage,
+    FavoriteStatus? favoriteStatus,
+  }) {
+    return FavoriteState(
+      status: status ?? this.status,
+      bookItems: bookItems ?? this.bookItems,
+      errorMessage: errorMessage ?? this.errorMessage,
+      favoriteStatus: favoriteStatus ?? this.favoriteStatus,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
-
-class FavoritesLoading extends FavoriteState {}
-
-class FavoritesSuccess extends FavoriteState {
-  final List<BookItem> bookItems;
-
-  const FavoritesSuccess({required this.bookItems});
-
-  @override
-  List<Object> get props => [bookItems];
-}
-
-class FavoritesEmpty extends FavoriteState {}
-
-class FavoritesFailure extends FavoriteState {
-  final String errorMessage;
-
-  const FavoritesFailure({required this.errorMessage});
-
-  @override
-  List<Object> get props => [errorMessage];
+  List<Object?> get props => [status, bookItems, favoriteStatus];
 }

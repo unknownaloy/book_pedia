@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 class BookItemsListView extends StatelessWidget {
   final String label;
   final List<BookItem> bookItems;
+  final Function(BookItem)? onFavoriteHandler;
 
   const BookItemsListView({
     Key? key,
     required this.label,
     required this.bookItems,
+    this.onFavoriteHandler,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class BookItemsListView extends StatelessWidget {
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) => DetailsScreen(
                         bookItem: book,
+                        onFavorite: onFavoriteHandler,
                       ),
                     ),
                   );

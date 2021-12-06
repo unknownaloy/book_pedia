@@ -1,1 +1,1 @@
-enum FavoriteStatus {initial, favorite, notFavorite}
+enum FavoriteStatus {idle, favorite, notFavorite}
