@@ -22,7 +22,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     FetchFavorites event,
     Emitter<FavoriteState> emit,
   ) async {
-
     try {
       final bookItems = await _databaseService.fetchFavoriteBooks(
         userId: Global.bookUser.id!,
@@ -32,9 +31,11 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         return emit(state.copyWith(status: RequestStatus.empty));
       }
 
-      return emit(state.copyWith(status: RequestStatus.success, bookItems: bookItems));
+      return emit(
+          state.copyWith(status: RequestStatus.success, bookItems: bookItems));
     } on Failure catch (e) {
-      return emit(state.copyWith(status: RequestStatus.failure, errorMessage: e.message));
+      return emit(state.copyWith(
+          status: RequestStatus.failure, errorMessage: e.message));
     }
   }
 
@@ -42,19 +43,24 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     FavoritePressed event,
     Emitter<FavoriteState> emit,
   ) async {
+    final List<BookItem> tempBookItems = state.bookItems!;
 
-    final List<BookItem>tempBookItems = state.bookItems!;
-
-    final indexOfBookItem = tempBookItems.indexWhere((item) => item == event.bookItem);
+    final indexOfBookItem =
+        tempBookItems.indexWhere((item) => item == event.bookItem);
 
     if (indexOfBookItem != -1) {
       tempBookItems.removeAt(indexOfBookItem);
-      emit(state.copyWith(bookItems: tempBookItems, favoriteStatus: FavoriteStatus.notFavorite));
+      emit(state.copyWith(
+          bookItems: tempBookItems,
+          favoriteStatus: FavoriteStatus.notFavorite));
     } else {
       tempBookItems.insert(0, event.bookItem);
-      emit(state.copyWith(bookItems: tempBookItems, favoriteStatus: FavoriteStatus.favorite));
+      emit(state.copyWith(
+          bookItems: tempBookItems, favoriteStatus: FavoriteStatus.favorite));
     }
 
-    return emit (state.copyWith(favoriteStatus: FavoriteStatus.idle));
+    return emit(
+      state.copyWith(favoriteStatus: FavoriteStatus.idle),
+    );
   }
 }
