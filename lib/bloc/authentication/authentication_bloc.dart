@@ -10,46 +10,36 @@ class AuthenticationBloc
 
   AuthenticationBloc({required AuthService authService})
       : _authService = authService,
-        super(Uninitialized());
-
-  @override
-  Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event) async* {
-    if (event is AppStarted) {
-      yield* _mapAppStartedToState(event);
-    } else if (event is LoggedIn) {
-      yield* _mapLoggedInToState(event);
-    } else if (event is LoggedOut) {
-      yield* _mapLoggedOutToState(event);
-    }
+        super(Uninitialized()) {
+    on<AppStarted>(_onAppStarted);
+    on<LoggedIn>(_onLoggedIn);
+    on<LoggedOut>(_onLoggedOut);
   }
 
-  Stream<AuthenticationState> _mapAppStartedToState(
-      AuthenticationEvent event) async* {
+  void _onAppStarted(AppStarted event, Emitter<AuthenticationState> emit) {
     try {
       final isSignedIn = _authService.isSignedIn();
 
       if (isSignedIn) {
         final bookUser = _authService.getUser();
         Global.bookUser = bookUser;
-        yield Authenticated(bookUser: bookUser);
+        return emit(Authenticated(bookUser: bookUser));
       } else {
-        yield Unauthenticated();
+        return emit(Unauthenticated());
       }
     } catch (e) {
-      yield Unauthenticated();
+      return emit(Unauthenticated());
     }
   }
 
-  Stream<AuthenticationState> _mapLoggedInToState(
-      AuthenticationEvent event) async* {
+  void _onLoggedIn(LoggedIn event, Emitter<AuthenticationState> emit) {
     final bookUser = _authService.getUser();
     Global.bookUser = bookUser;
-    yield Authenticated(bookUser: bookUser);
+    return emit(Authenticated(bookUser: bookUser));
   }
 
-  Stream<AuthenticationState> _mapLoggedOutToState(AuthenticationEvent event) async* {
-    yield Unauthenticated();
+  void _onLoggedOut(LoggedOut event, Emitter<AuthenticationState> emit) {
+    emit(Unauthenticated());
     _authService.logOut();
   }
 }

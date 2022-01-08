@@ -9,56 +9,48 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc({required AuthService authService})
       : _authService = authService,
-        super(LoginInitial());
-
-  @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is LoginInWithEmailPressed) {
-      yield* _mapLoginInWithEmailPressedToState(
-        email: event.email,
-        password: event.password,
-      );
-    } else if (event is LoginInWithGoogle) {
-      yield* _mapLoginInWithGoogleToState();
-    }
-
+        super(LoginInitial()) {
+    on<LoginInWithEmailPressed>(_onLoginInWithEmailPressed);
+    on<LoginInWithGoogle>(_onLoginInWithGoogle);
   }
 
-  Stream<LoginState> _mapLoginInWithEmailPressedToState({
-    required String email,
-    required String password,
-  }) async* {
-    yield LoginLoading();
+  void _onLoginInWithEmailPressed(
+    LoginInWithEmailPressed event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(LoginLoading());
 
     try {
       final bookUser = await _authService.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: event.email,
+        password: event.password,
       );
 
       if (bookUser != null) {
-        yield LoginSuccess();
+        return emit(LoginSuccess());
       } else {
-        yield const LoginFailure(error: "Something went wrong. Try again");
+        return emit(
+            const LoginFailure(error: "Something went wrong. Try again"));
       }
     } on Failure catch (e) {
-      yield LoginFailure(error: e.message);
+      return emit(LoginFailure(error: e.message));
     }
   }
 
-  Stream<LoginState> _mapLoginInWithGoogleToState() async* {
-    yield LoginLoading();
+  void _onLoginInWithGoogle(LoginInWithGoogle event, Emitter<LoginState> emit,) async {
+    emit(LoginLoading());
 
     try {
       final bookUser = await _authService.signInWithGoogle();
 
       if (bookUser != null) {
-        yield LoginSuccess();
+        return emit(LoginSuccess());
       } else {
-        yield const LoginFailure(error: "Something went wrong. Try again");
+        return emit(const LoginFailure(error: "Something went wrong. Try again"));
       }
     } on Failure catch (e) {
-      yield LoginFailure(error: e.message);
+      return emit(LoginFailure(error: e.message));
     }
   }
+
 }

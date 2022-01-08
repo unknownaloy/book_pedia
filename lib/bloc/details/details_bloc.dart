@@ -19,6 +19,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   void _onDetailsLaunched(
       DetailsLaunched event, Emitter<DetailsState> emit) async {
     if (!event.bookItem.isFavorite) {
+      print("Getting favorite status");
       final status = await _databaseService.getFavoriteStatus(
         userId: event.userId,
         bookItem: event.bookItem,

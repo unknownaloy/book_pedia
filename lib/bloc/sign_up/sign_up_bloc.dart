@@ -9,53 +9,51 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   SignUpBloc({required AuthService authService})
       : _authService = authService,
-        super(SignUpInitial());
-
-  @override
-  Stream<SignUpState> mapEventToState(SignUpEvent event) async* {
-    if (event is SignUpWithEmailPressed) {
-      yield* _mapSignUpWithEmailPressedToState(
-        email: event.email,
-        password: event.password,
-      );
-    } else if (event is SignUpWithGoogle) {
-      yield* _mapSignUpWithGoogle();
-    }
+        super(SignUpInitial()) {
+    on<SignUpWithEmailPressed>(_onSignUpWithEmailPressed);
+    on<SignUpWithGoogle>(_onSignUpWithGoogle);
   }
 
-  Stream<SignUpState> _mapSignUpWithEmailPressedToState({
-    required String email,
-    required String password,
-  }) async* {
-    yield SignUpLoading();
+  void _onSignUpWithEmailPressed(
+    SignUpWithEmailPressed event,
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(SignUpLoading());
 
     try {
       final bookUser = await _authService.signUpWithEmailAndPassword(
-          email: email, password: password,);
+        email: event.email,
+        password: event.password,
+      );
 
       if (bookUser != null) {
-        yield SignUpSuccess();
+        return emit(SignUpSuccess());
       } else {
-        yield const SignUpFailure(error: "Something went wrong. Try again");
+        return emit(
+            const SignUpFailure(error: "Something went wrong. Try again"));
       }
     } on Failure catch (e) {
-      yield SignUpFailure(error: e.message);
+      return emit(SignUpFailure(error: e.message));
     }
   }
 
-  Stream<SignUpState> _mapSignUpWithGoogle() async* {
-    yield SignUpLoading();
+  void _onSignUpWithGoogle(
+    SignUpWithGoogle event,
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(SignUpLoading());
 
     try {
       final bookUser = await _authService.signInWithGoogle();
 
       if (bookUser != null) {
-        yield SignUpSuccess();
+        return emit(SignUpSuccess());
       } else {
-        yield const SignUpFailure(error: "Something went wrong. Try again");
+        return emit(
+            const SignUpFailure(error: "Something went wrong. Try again"));
       }
     } on Failure catch (e) {
-      yield SignUpFailure(error: e.message);
+      return emit(SignUpFailure(error: e.message));
     }
   }
 }
