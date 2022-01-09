@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:book_pedia/api_keys/books_api.dart';
-import 'package:book_pedia/models/book_model/books.dart';
+import 'package:book_pedia/config/api_keys/books_api.dart';
+import 'package:book_pedia/common/models/book_model/books.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:book_pedia/utilities/strings.dart';
 import 'package:http/http.dart' as http;
