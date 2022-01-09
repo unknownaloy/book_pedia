@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             body: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 24.0,
-                horizontal: 16.0,
+                // horizontal: 16.0,
               ),
               child: Column(
                 children: [
@@ -91,7 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.only(
                       top: 18.0,
                       bottom: 6.0,
-                    ), //Same as `blurRadius` i guess
+                      left: 16.0,
+                      right: 16.0,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50.0),
                       border: Border.all(color: Colors.transparent),
