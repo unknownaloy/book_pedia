@@ -43,6 +43,8 @@ class _DetailsScreenState extends State<DetailsScreen>
   void initState() {
     super.initState();
 
+    print("Init state called");
+
     _isFavorite = widget.bookItem.isFavorite;
 
     _detailsBloc = DetailsBloc(databaseService: _databaseService);
