@@ -79,9 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ];
             },
             body: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 24.0,
-                horizontal: 16.0,
+              padding: const EdgeInsets.only(
+                top: 24.0,
+                // horizontal: 16.0,
               ),
               child: Column(
                 children: [
@@ -126,7 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         contentPadding: const EdgeInsets.only(
-                            left: 24.0, right: 24.0, top: 16.0),
+                          left: 24.0,
+                          right: 24.0,
+                          top: 16.0,
+                        ),
                         hintText: AppLocalizations.of(context)!.searchForBooks,
                         border: InputBorder.none,
                         focusColor: kAccentColor,

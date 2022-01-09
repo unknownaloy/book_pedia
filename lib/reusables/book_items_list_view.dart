@@ -21,13 +21,17 @@ class BookItemsListView extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            label,
-            style: Theme.of(context).textTheme.headline3,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              bottom: 16.0,
+            ),
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.headline3,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 24.0,
         ),
         Expanded(
           child: ListView.builder(

@@ -28,6 +28,11 @@ class BookCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            margin: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              top: 8.0,
+            ), // Margin can be passed in the constructor
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
