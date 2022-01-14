@@ -18,6 +18,7 @@ class LoadingShimmer extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(
               bottom: 24.0,
+              left: 16.0, right: 16.0,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,

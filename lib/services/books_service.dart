@@ -10,11 +10,15 @@ import 'package:http/http.dart' as http;
 class BooksService {
   final http.Client _client = http.Client();
 
-  Future<Books> fetchFamousBooks([String query = "famous books"]) async {
+  Future<Books> fetchFamousBooks({
+    String query = "famous books",
+    int startIndex = 0,
+  }) async {
     try {
       Map<String, String> queryParams = {
         "q": query,
         "client_id": clientId,
+        "startIndex": startIndex.toString(),
       };
 
       var uri =

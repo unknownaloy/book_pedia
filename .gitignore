@@ -45,6 +45,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
 # Extra files
 /lib/config/api_keys

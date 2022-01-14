@@ -1,7 +1,6 @@
 import 'package:book_pedia/features/home/bloc/home_bloc.dart';
 import 'package:book_pedia/features/home/bloc/home_event.dart';
 import 'package:book_pedia/features/home/bloc/home_state.dart';
-import 'package:book_pedia/common/models/book_model/book_item.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/config/theme/colors.dart';
 import 'package:book_pedia/reusables/book_items_list_view.dart';
@@ -29,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _homeBloc = HomeBloc(booksService: _booksService);
-    _homeBloc.add(FetchBooks());
+    _homeBloc.add(FetchFamousBooks());
   }
 
   @override
@@ -168,6 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? AppLocalizations.of(context)!.famousBooks
                                 : _searchController.text.trim(),
                             bookItems: bookItems!,
+                            isLoadingMoreData: state.isFetchingNewBooks,
+                            onScrollEnd: () {
+                              _homeBloc.add(FetchBooks(_searchController.text.trim()));
+                            },
                           ),
                         );
                       }

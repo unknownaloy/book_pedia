@@ -2,9 +2,9 @@ import 'package:book_pedia/common/models/book_model/books.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-enum HomeStatus { loading, success, empty, failure }
+enum HomeStatus { initial, loading, success, empty, failure }
 
-enum HomeType { famous, searched }
+enum HomeType {famous, searched}
 
 @immutable
 class HomeState extends Equatable {
@@ -12,12 +12,16 @@ class HomeState extends Equatable {
   final HomeType homeType;
   final Books? books;
   final String? errorMessage;
+  final bool hasReachedMax;
+  final bool isFetchingNewBooks;
 
   const HomeState({
-    this.status = HomeStatus.loading,
+    this.status = HomeStatus.initial,
     this.homeType = HomeType.famous,
     this.books,
     this.errorMessage,
+    this.hasReachedMax = false,
+    this.isFetchingNewBooks = false,
   });
 
   HomeState copyWith({
@@ -25,17 +29,21 @@ class HomeState extends Equatable {
     HomeType? homeType,
     Books? books,
     String? errorMessage,
+    bool? hasReachedMax,
+    bool? isFetchingNewBooks,
   }) {
     return HomeState(
       status: status ?? this.status,
       homeType: homeType ?? this.homeType,
       books: books ?? this.books,
       errorMessage: errorMessage ?? this.errorMessage,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      isFetchingNewBooks: isFetchingNewBooks ?? this.isFetchingNewBooks,
     );
   }
 
   @override
-  List<Object?> get props => [status, homeType, books, errorMessage];
+  List<Object?> get props => [status, homeType, books, errorMessage, hasReachedMax, isFetchingNewBooks,];
 }
 
 // @immutable
