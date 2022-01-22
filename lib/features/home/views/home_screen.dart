@@ -1,6 +1,9 @@
+import 'package:book_pedia/features/details/views/details_screen.dart';
 import 'package:book_pedia/features/home/bloc/home_bloc.dart';
 import 'package:book_pedia/features/home/bloc/home_event.dart';
 import 'package:book_pedia/features/home/bloc/home_state.dart';
+import 'package:book_pedia/reusables/book_card.dart';
+import 'package:book_pedia/reusables/persistent_header.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/config/theme/colors.dart';
 import 'package:book_pedia/reusables/book_items_list_view.dart';
@@ -24,17 +27,53 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final TextEditingController _searchController = TextEditingController();
 
+  late final ScrollController _scrollController;
+
+  bool _isSearchedResult = false;
+
+  bool _isAtBottom = false;
+  bool _isLoadingMoreData = false;
+
+  void _scrollListenerHandler() {
+    double maxScroll = _scrollController.position.maxScrollExtent;
+    double currentScroll = _scrollController.position.pixels;
+    double delta = MediaQuery.of(context).size.height * 0.20;
+
+    if (maxScroll - currentScroll <= delta) {
+      _homeBloc.add(
+        FetchBooks(
+          _searchController.text.trim(),
+        ),
+      );
+    }
+
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() => _isAtBottom = true);
+    } else {
+      setState(() => _isAtBottom = false);
+    }
+
+  }
+
   @override
   void initState() {
     super.initState();
     _homeBloc = HomeBloc(booksService: _booksService);
     _homeBloc.add(FetchFamousBooks());
+
+    _scrollController = ScrollController();
+
+    _scrollController.addListener(_scrollListenerHandler);
   }
 
   @override
   void dispose() {
     _homeBloc.close();
     _searchController.dispose();
+
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -45,51 +84,45 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: const HomeDrawer(),
         body: BlocProvider(
           create: (context) => _homeBloc,
-          child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverOverlapAbsorber(
-                  handle:
-                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  sliver: SliverAppBar(
-                    pinned: false,
-                    floating: true,
-                    snap: true,
-                    title: Text(
-                      "Book Pedia",
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverAppBar(
+                pinned: false,
+                floating: true,
+                snap: true,
+                title: Text(
+                  "Book Pedia",
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  sliver: SliverToBoxAdapter(
-                    child:
-
-                        /// App's slogan
-                        Text(
-                      AppLocalizations.of(context)!
-                          .exploreThousandsOfBooksOnTheGo,
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                  ),
-                ),
-              ];
-            },
-            body: Padding(
-              padding: const EdgeInsets.only(
-                top: 24.0,
-                // horizontal: 16.0,
               ),
-              child: Column(
-                children: [
-                  /// Search text widget
-                  Container(
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: 40.0,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: Text(
+                    AppLocalizations.of(context)!
+                        .exploreThousandsOfBooksOnTheGo,
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: PersistentHeader(
+                  // minHeight: 64.0,
+                  margin: const EdgeInsets.only(
+                    top: 0.0,
+                    bottom: 8.0,
+                  ),
+                  child: Container(
                     height: 56.0,
                     margin: const EdgeInsets.only(
-                      top: 18.0,
-                      bottom: 6.0,
+                      // top: 18.0,
+                      // bottom: 6.0,
                       left: 16.0,
                       right: 16.0,
                     ),
@@ -136,53 +169,125 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-
-                  const SizedBox(
-                    height: 24.0,
-                  ),
-
-                  BlocBuilder<HomeBloc, HomeState>(
-                    bloc: _homeBloc,
-                    builder: (context, state) {
-                      if (state.status == HomeStatus.failure) {
-                        return Expanded(
-                          child: MessageDisplay(error: state.errorMessage!),
-                        );
-                      }
-
-                      if (state.status == HomeStatus.empty) {
-                        return Expanded(
-                          child: MessageDisplay(
-                              error:
-                                  AppLocalizations.of(context)!.noResultFound),
-                        );
-                      }
-
-                      if (state.status == HomeStatus.success) {
-                        final bookItems = state.books!.bookItem;
-
-                        return Expanded(
-                          child: BookItemsListView(
-                            label: state.homeType == HomeType.famous
-                                ? AppLocalizations.of(context)!.famousBooks
-                                : _searchController.text.trim(),
-                            bookItems: bookItems!,
-                            isLoadingMoreData: state.isFetchingNewBooks,
-                            onScrollEnd: () {
-                              _homeBloc.add(FetchBooks(_searchController.text.trim()));
-                            },
-                          ),
-                        );
-                      }
-
-                      return const Expanded(
-                        child: LoadingShimmer(),
-                      );
-                    },
-                  ),
-                ],
+                ),
               ),
-            ),
+              SliverToBoxAdapter(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      right: 16.0,
+                      bottom: 16.0,
+                    ),
+                    child: Text(
+                      _isSearchedResult
+                          ? _searchController.text.trim()
+                          : AppLocalizations.of(context)!.famousBooks,
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                  ),
+                ),
+              ),
+              BlocConsumer<HomeBloc, HomeState>(
+                bloc: _homeBloc,
+                listener: (context, state) {
+                  if (state.status == HomeStatus.success) {
+                    if (state.homeType == HomeType.famous) {
+                      setState(() => _isSearchedResult = false);
+                    } else {
+                      setState(() => _isSearchedResult = true);
+                    }
+
+                    if (state.isFetchingNewBooks) {
+                      setState(() => _isLoadingMoreData = true);
+                    } else {
+                      setState(() => _isLoadingMoreData = false);
+                    }
+                  }
+                },
+                builder: (context, state) {
+                  if (state.status == HomeStatus.failure) {
+                    return SliverFillRemaining(
+                      child: MessageDisplay(error: state.errorMessage!),
+                    );
+                  }
+
+                  if (state.status == HomeStatus.empty) {
+                    return SliverFillRemaining(
+                      child: MessageDisplay(
+                          error: AppLocalizations.of(context)!.noResultFound),
+                    );
+                  }
+
+                  if (state.status == HomeStatus.success) {
+                    final bookItems = state.books!.bookItem;
+
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          final book = bookItems![index];
+                          return BookCard(
+                            imageUrl:
+                                book.bookVolumeInfo.bookImages?.smallThumbnail,
+                            bookTitle: book.bookVolumeInfo.title,
+                            bookAuthor: book.bookVolumeInfo.authors?.join(", "),
+                            bookRating: book.bookVolumeInfo.rating,
+                            category: book.bookVolumeInfo.categories?[0],
+                            heroTag: book.id,
+                            onTap: () {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      DetailsScreen(
+                                    bookItem: book,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        childCount: bookItems!.length,
+                      ),
+                    );
+
+                    return SliverFillRemaining(
+                      child: BookItemsListView(
+                        label: state.homeType == HomeType.famous
+                            ? AppLocalizations.of(context)!.famousBooks
+                            : _searchController.text.trim(),
+                        bookItems: bookItems,
+                        isLoadingMoreData: state.isFetchingNewBooks,
+                        onScrollEnd: () {
+                          _homeBloc
+                              .add(FetchBooks(_searchController.text.trim()));
+                        },
+                      ),
+                    );
+                  }
+
+                  return const SliverFillRemaining(
+                    child: LoadingShimmer(),
+                  );
+                },
+              ),
+              SliverToBoxAdapter(
+                child: _isAtBottom && _isLoadingMoreData ? Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 4.0,
+                    ),
+                    width: 18.0,
+                    height: 18.0,
+                    child: const CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                      color: kAccentColor,
+                    ),
+                  ),
+                ) : const SizedBox.shrink(),
+              ),
+            ],
           ),
         ),
       ),

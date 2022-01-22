@@ -18,7 +18,8 @@ class LoadingShimmer extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(
               bottom: 24.0,
-              left: 16.0, right: 16.0,
+              left: 16.0,
+              right: 16.0,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -60,7 +61,9 @@ class LoadingShimmer extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.16,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 8.0,),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
                     Container(
                       height: 24.0,
                       width: MediaQuery.of(context).size.width * 0.32,
