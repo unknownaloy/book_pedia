@@ -1,4 +1,4 @@
-import 'package:book_pedia/common/models/book_model/book_item.dart';
+import 'package:book_pedia/data/models/book/book_item.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class FavoriteEvent extends Equatable {

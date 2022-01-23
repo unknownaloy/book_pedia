@@ -1,15 +1,17 @@
 import 'dart:io';
 
-import 'package:book_pedia/common/models/book_user.dart';
+import 'package:book_pedia/data/models/book_user.dart';
+import 'package:book_pedia/domain/repositories/auth_repository.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:book_pedia/utilities/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthService {
+class AuthRepositoryImpl extends AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  @override
   Future<BookUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
@@ -37,6 +39,7 @@ class AuthService {
     }
   }
 
+  @override
   Future<BookUser?> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -69,6 +72,7 @@ class AuthService {
     }
   }
 
+  @override
   Future<BookUser?> signUpWithEmailAndPassword({
     required String email,
     required String password,
@@ -93,18 +97,21 @@ class AuthService {
     }
   }
 
+  @override
   bool isSignedIn() {
     final currentUser = _auth.currentUser;
 
     return currentUser != null;
   }
 
+  @override
   BookUser getUser() {
     User? user = _auth.currentUser;
     BookUser? bookUser = BookUser(id: user?.uid, email: user?.email!);
     return bookUser;
   }
 
+  @override
   Future<void> logOut() async {
     await _googleSignIn.signOut();
     await _auth.signOut();

@@ -1,14 +1,14 @@
-import 'package:book_pedia/common/models/book_model/book_item.dart';
+import 'package:book_pedia/data/models/book/book_item.dart';
+import 'package:book_pedia/data/repositories/database_repository_impl.dart';
 import 'package:book_pedia/features/details/bloc/details.event.dart';
 import 'package:book_pedia/features/details/bloc/details.state.dart';
 import 'package:book_pedia/enums/favorite_status.dart';
-import 'package:book_pedia/services/database_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
-  final DatabaseService _databaseService;
+  final DatabaseRepositoryImpl _databaseService;
 
-  DetailsBloc({required DatabaseService databaseService})
+  DetailsBloc({required DatabaseRepositoryImpl databaseService})
       : _databaseService = databaseService,
         super(const DetailsState()) {
     on<DetailsLaunched>(_onDetailsLaunched);

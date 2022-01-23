@@ -1,6 +1,6 @@
+import 'package:book_pedia/data/models/book/book_item.dart';
 import 'package:book_pedia/enums/favorite_status.dart';
 import 'package:book_pedia/enums/request_status.dart';
-import 'package:book_pedia/common/models/book_model/book_item.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

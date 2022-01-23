@@ -1,5 +1,5 @@
-import 'package:book_pedia/common/models/book_model/book_item.dart';
 import 'package:book_pedia/config/theme/colors.dart';
+import 'package:book_pedia/data/models/book/book_item.dart';
 import 'package:book_pedia/reusables/book_card.dart';
 import 'package:book_pedia/features/details/views/details_screen.dart';
 import 'package:flutter/material.dart';

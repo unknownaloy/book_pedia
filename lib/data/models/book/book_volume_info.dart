@@ -1,5 +1,5 @@
-import 'package:book_pedia/common/models/book_model/book_images.dart';
 import 'package:equatable/equatable.dart';
+import 'package:book_pedia/data/models/book/book_images.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book_volume_info.g.dart';
@@ -41,16 +41,16 @@ class BookVolumeInfo extends Equatable {
 
   @override
   List<Object?> get props => [
-        title,
-        subtitle,
-        authors,
-        rating,
-        ratingsCount,
-        description,
-        pages,
-        categories,
-        bookImages,
-      ];
+    title,
+    subtitle,
+    authors,
+    rating,
+    ratingsCount,
+    description,
+    pages,
+    categories,
+    bookImages,
+  ];
 
   factory BookVolumeInfo.fromJson(Map<String, dynamic> json) =>
       _$BookVolumeInfoFromJson(json);

@@ -1,8 +1,8 @@
+import 'package:book_pedia/data/repositories/database_repository_impl.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_bloc.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_event.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_state.dart';
 import 'package:book_pedia/enums/request_status.dart';
-import 'package:book_pedia/services/database_service.dart';
 import 'package:book_pedia/reusables/book_items_list_view.dart';
 import 'package:book_pedia/reusables/message_display.dart';
 import 'package:book_pedia/reusables/shimmers/loading_shimmer.dart';
@@ -19,7 +19,7 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   late FavoriteBloc _favoriteBloc;
-  final _databaseService = DatabaseService();
+  final _databaseService = DatabaseRepositoryImpl();
 
   @override
   void initState() {

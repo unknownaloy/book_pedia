@@ -1,9 +1,9 @@
+import 'package:book_pedia/data/models/book/book_item.dart';
+import 'package:book_pedia/data/repositories/database_repository_impl.dart';
 import 'package:book_pedia/features/details/bloc/details.event.dart';
 import 'package:book_pedia/features/details/bloc/details.state.dart';
 import 'package:book_pedia/features/details/bloc/details_bloc.dart';
 import 'package:book_pedia/enums/favorite_status.dart';
-import 'package:book_pedia/common/models/book_model/book_item.dart';
-import 'package:book_pedia/services/database_service.dart';
 import 'package:book_pedia/config/theme/colors.dart';
 import 'package:book_pedia/reusables/book_item_description.dart';
 import 'package:book_pedia/reusables/book_item_detail.dart';
@@ -29,7 +29,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen>
     with SingleTickerProviderStateMixin {
   late DetailsBloc _detailsBloc;
-  final _databaseService = DatabaseService();
+  final _databaseService = DatabaseRepositoryImpl();
 
   late AnimationController _animationController;
   late Animation<double> _sizeAnimation;

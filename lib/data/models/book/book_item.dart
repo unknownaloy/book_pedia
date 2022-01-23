@@ -1,4 +1,4 @@
-import 'package:book_pedia/common/models/book_model/book_volume_info.dart';
+import 'package:book_pedia/data/models/book/book_volume_info.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,11 +12,11 @@ class BookItem extends Equatable {
   final BookVolumeInfo bookVolumeInfo;
 
   @JsonKey(defaultValue: false)
-  bool isFavorite;
+  final bool isFavorite;
 
   final int? timeStamp;
 
-  BookItem({
+  const BookItem({
     required this.id,
     required this.bookVolumeInfo,
     required this.isFavorite,

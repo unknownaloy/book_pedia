@@ -1,4 +1,4 @@
-import 'package:book_pedia/common/models/book_user.dart';
+import 'package:book_pedia/data/models/book_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 

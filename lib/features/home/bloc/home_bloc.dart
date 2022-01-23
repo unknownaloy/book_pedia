@@ -1,15 +1,15 @@
+import 'package:book_pedia/data/models/books.dart';
+import 'package:book_pedia/data/repositories/book_repository_impl.dart';
 import 'package:book_pedia/features/home/bloc/home_event.dart';
 import 'package:book_pedia/features/home/bloc/home_state.dart';
-import 'package:book_pedia/common/models/book_model/books.dart';
-import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final BooksService _booksService;
+  final BookRepositoryImpl _booksService;
 
-  HomeBloc({required BooksService booksService})
+  HomeBloc({required BookRepositoryImpl booksService})
       : _booksService = booksService,
         super(const HomeState()) {
     on<FetchFamousBooks>(_onFetchFamousBooks);
@@ -34,7 +34,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _onFetchFamousBooks(
       FetchFamousBooks event, Emitter<HomeState> emit) async {
     try {
-      final books = await _booksService.fetchFamousBooks();
+      final books = await _booksService.fetchBooks();
       _cachedBooks = books;
       return emit(state.copyWith(status: HomeStatus.success, books: books));
     } on Failure catch (e) {
@@ -51,7 +51,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     try {
       final books =
-      await _booksService.fetchFamousBooks(query: event.searchQuery);
+      await _booksService.fetchBooks(query: event.searchQuery);
 
       if (books.totalItems == 0) {
         return emit(state.copyWith(status: HomeStatus.empty));
@@ -84,8 +84,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       state.homeType == HomeType.famous
           ? books =
-              await _booksService.fetchFamousBooks(startIndex: bookLastIndex)
-          : books = await _booksService.fetchFamousBooks(
+              await _booksService.fetchBooks(startIndex: bookLastIndex)
+          : books = await _booksService.fetchBooks(
               startIndex: bookLastIndex,
               query: event.searchQuery!,
             );

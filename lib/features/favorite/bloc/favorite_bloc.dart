@@ -1,17 +1,17 @@
+import 'package:book_pedia/data/models/book/book_item.dart';
+import 'package:book_pedia/data/repositories/database_repository_impl.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_event.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_state.dart';
 import 'package:book_pedia/enums/favorite_status.dart';
 import 'package:book_pedia/enums/request_status.dart';
-import 'package:book_pedia/common/models/book_model/book_item.dart';
-import 'package:book_pedia/services/database_service.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:book_pedia/utilities/global.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
-  final DatabaseService _databaseService;
+  final DatabaseRepositoryImpl _databaseService;
 
-  FavoriteBloc({required DatabaseService databaseService})
+  FavoriteBloc({required DatabaseRepositoryImpl databaseService})
       : _databaseService = databaseService,
         super(const FavoriteState()) {
     on<FetchFavorites>(_onFetchFavorites);

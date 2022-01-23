@@ -1,10 +1,10 @@
+import 'package:book_pedia/data/repositories/book_repository_impl.dart';
 import 'package:book_pedia/features/details/views/details_screen.dart';
 import 'package:book_pedia/features/home/bloc/home_bloc.dart';
 import 'package:book_pedia/features/home/bloc/home_event.dart';
 import 'package:book_pedia/features/home/bloc/home_state.dart';
 import 'package:book_pedia/reusables/book_card.dart';
 import 'package:book_pedia/reusables/persistent_header.dart';
-import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/config/theme/colors.dart';
 import 'package:book_pedia/reusables/message_display.dart';
 import 'package:book_pedia/features/home/components/home_drawer.dart';
@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late HomeBloc _homeBloc;
-  final _booksService = BooksService();
+  final _booksService = BookRepositoryImpl();
 
   final TextEditingController _searchController = TextEditingController();
 

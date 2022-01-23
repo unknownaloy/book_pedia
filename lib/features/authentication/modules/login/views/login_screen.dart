@@ -1,9 +1,9 @@
+import 'package:book_pedia/data/repositories/auth_repository_impl.dart';
 import 'package:book_pedia/features/authentication/bloc/authentication_bloc.dart';
 import 'package:book_pedia/features/authentication/bloc/authentication_event.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_bloc.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_event.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_state.dart';
-import 'package:book_pedia/features/authentication/services/auth_service.dart';
 import 'package:book_pedia/config/theme/colors.dart';
 import 'package:book_pedia/config/theme/text_field_style.dart';
 import 'package:book_pedia/reusables/button.dart';
@@ -24,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late LoginBloc _loginBloc;
-  final _authService = AuthService();
+  final _authService = AuthRepositoryImpl();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();

@@ -1,13 +1,13 @@
+import 'package:book_pedia/data/repositories/auth_repository_impl.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_event.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_state.dart';
-import 'package:book_pedia/features/authentication/services/auth_service.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthService _authService;
+  final AuthRepositoryImpl _authService;
 
-  LoginBloc({required AuthService authService})
+  LoginBloc({required AuthRepositoryImpl authService})
       : _authService = authService,
         super(LoginInitial()) {
     on<LoginInWithEmailPressed>(_onLoginInWithEmailPressed);

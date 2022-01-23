@@ -1,15 +1,17 @@
 import 'dart:io';
 
-import 'package:book_pedia/common/models/book_model/book_item.dart';
+import 'package:book_pedia/data/models/book/book_item.dart';
+import 'package:book_pedia/domain/repositories/database_repository.dart';
 import 'package:book_pedia/utilities/failure.dart';
 import 'package:book_pedia/utilities/strings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DatabaseService {
+class DatabaseRepositoryImpl extends DatabaseRepository {
   final _db = FirebaseFirestore.instance;
 
   List<DocumentSnapshot> _lastDocumentSnapshot = [];
 
+  @override
   Future<bool> getFavoriteStatus({
     required String userId,
     required BookItem bookItem,
@@ -34,10 +36,12 @@ class DatabaseService {
     }
   }
 
+  @override
   Future<void> addBookItemToFavorite({
     required String userId,
     required BookItem bookItem,
   }) async {
+
     try {
       _db
           .collection("users")
@@ -54,10 +58,9 @@ class DatabaseService {
     }
   }
 
-  Future<void> removeBookItemFromFavorite({
-    required String userId,
-    required BookItem bookItem,
-  }) async {
+  @override
+  Future<void> removeBookItemFromFavorite(
+      {required String userId, required BookItem bookItem,}) async {
     try {
       _db
           .collection("users")
@@ -74,6 +77,7 @@ class DatabaseService {
     }
   }
 
+  @override
   Future<List<BookItem>> fetchFavoriteBooks({required String userId}) async {
     try {
       List<BookItem> bookItems = [];
@@ -110,7 +114,9 @@ class DatabaseService {
     }
   }
 
-  Future<List<BookItem>> fetchNextFavoriteBooks({required String userId}) async {
+  @override
+  Future<List<BookItem>> fetchNextFavoriteBooks(
+      {required String userId}) async {
     try {
       List<BookItem> bookItems = [];
       QuerySnapshot querySnapshot = await _db
@@ -151,6 +157,7 @@ class DatabaseService {
   void _saveLastDocumentSnapshot(List<DocumentSnapshot> lastDocumentSnapshot) {
     _lastDocumentSnapshot = lastDocumentSnapshot;
 
-    print("DatabaseService -> _saveLastDocumentSnapshot == lastDocumentSnapshot saved!!!");
+    print(
+        "DatabaseService -> _saveLastDocumentSnapshot == lastDocumentSnapshot saved!!!");
   }
 }
