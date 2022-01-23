@@ -6,7 +6,6 @@ import 'package:book_pedia/reusables/book_card.dart';
 import 'package:book_pedia/reusables/persistent_header.dart';
 import 'package:book_pedia/services/books_service.dart';
 import 'package:book_pedia/config/theme/colors.dart';
-import 'package:book_pedia/reusables/book_items_list_view.dart';
 import 'package:book_pedia/reusables/message_display.dart';
 import 'package:book_pedia/features/home/components/home_drawer.dart';
 import 'package:book_pedia/reusables/shimmers/loading_shimmer.dart';
@@ -249,20 +248,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         },
                         childCount: bookItems!.length,
-                      ),
-                    );
-
-                    return SliverFillRemaining(
-                      child: BookItemsListView(
-                        label: state.homeType == HomeType.famous
-                            ? AppLocalizations.of(context)!.famousBooks
-                            : _searchController.text.trim(),
-                        bookItems: bookItems,
-                        isLoadingMoreData: state.isFetchingNewBooks,
-                        onScrollEnd: () {
-                          _homeBloc
-                              .add(FetchBooks(_searchController.text.trim()));
-                        },
                       ),
                     );
                   }

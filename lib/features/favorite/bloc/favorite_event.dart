@@ -18,3 +18,5 @@ class FavoritePressed extends FavoriteEvent {
   @override
   List<Object> get props => [bookItem];
 }
+
+class FetchMoreFavoriteBooks extends FavoriteEvent {}

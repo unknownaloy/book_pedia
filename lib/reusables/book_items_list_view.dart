@@ -5,7 +5,6 @@ import 'package:book_pedia/features/details/views/details_screen.dart';
 import 'package:flutter/material.dart';
 
 class BookItemsListView extends StatefulWidget {
-  final String label;
   final List<BookItem> bookItems;
   final Function(BookItem)? onFavoriteHandler;
   final bool isLoadingMoreData;
@@ -13,7 +12,6 @@ class BookItemsListView extends StatefulWidget {
 
   const BookItemsListView({
     Key? key,
-    required this.label,
     required this.bookItems,
     this.onFavoriteHandler,
     this.isLoadingMoreData = false,
@@ -67,20 +65,6 @@ class _BookItemsListViewState extends State<BookItemsListView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              bottom: 16.0,
-            ),
-            child: Text(
-              widget.label,
-              style: Theme.of(context).textTheme.headline3,
-            ),
-          ),
-        ),
         Expanded(
           child: ListView.builder(
             controller: _scrollController,

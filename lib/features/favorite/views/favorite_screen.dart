@@ -41,12 +41,16 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0.0,
+          title: Text(
+            AppLocalizations.of(context)!.favorites,
+            style: Theme.of(context).textTheme.headline3,
+          ),
         ),
         body: BlocProvider(
           create: (context) => _favoriteBloc,
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+                const EdgeInsets.only(top: 8.0),
             child: BlocBuilder<FavoriteBloc, FavoriteState>(
               builder: (context, state) {
                 if (state.status == RequestStatus.empty) {
@@ -62,8 +66,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
                 if (state.status == RequestStatus.success) {
                   return BookItemsListView(
-                    label: AppLocalizations.of(context)!.favorites,
                     bookItems: state.bookItems!,
+                    onScrollEnd: () {
+                      _favoriteBloc.add(FetchMoreFavoriteBooks());
+                    },
+                    isLoadingMoreData: state.isFetchingNewBooks, // Whether to display bottom loading icon
                     onFavoriteHandler: (bookItem) => _favoriteBloc.add(
                       FavoritePressed(bookItem: bookItem),
                     ),

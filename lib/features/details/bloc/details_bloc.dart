@@ -1,3 +1,4 @@
+import 'package:book_pedia/common/models/book_model/book_item.dart';
 import 'package:book_pedia/features/details/bloc/details.event.dart';
 import 'package:book_pedia/features/details/bloc/details.state.dart';
 import 'package:book_pedia/enums/favorite_status.dart';
@@ -47,9 +48,15 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       // event.bookItem.isFavorite = true;
 
       emit(state.copyWith(favoriteStatus: FavoriteStatus.favorite));
+
+      final tempBookItem = event.bookItem.toJson();
+      tempBookItem["timeStamp"] = DateTime.now().millisecondsSinceEpoch;
+
+      BookItem bookItemWithTimeStamp = BookItem.fromJson(tempBookItem);
+
       return await _databaseService.addBookItemToFavorite(
         userId: event.userId,
-        bookItem: event.bookItem,
+        bookItem: bookItemWithTimeStamp,
       );
     }
   }

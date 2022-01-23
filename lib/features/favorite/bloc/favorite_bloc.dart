@@ -16,6 +16,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         super(const FavoriteState()) {
     on<FetchFavorites>(_onFetchFavorites);
     on<FavoritePressed>(_onFavoritePressed);
+    on<FetchMoreFavoriteBooks>(_onFetchMoreFavoriteBooks);
   }
 
   void _onFetchFavorites(
@@ -28,7 +29,21 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
       );
 
       if (bookItems.isEmpty) {
-        return emit(state.copyWith(status: RequestStatus.empty));
+        return emit(state.copyWith(
+          status: RequestStatus.empty,
+          hasReachedMax: true,
+        ));
+      }
+
+      /// If the length of books return is less than 10, it means there's no more
+      /// books available in the user's favorite collection to fetch more books from
+      if (bookItems.length < 10) {
+        return emit(
+          state.copyWith(
+              status: RequestStatus.success,
+              bookItems: bookItems,
+              hasReachedMax: true),
+        );
       }
 
       return emit(
@@ -62,5 +77,52 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     return emit(
       state.copyWith(favoriteStatus: FavoriteStatus.idle),
     );
+  }
+
+  void _onFetchMoreFavoriteBooks(
+    FetchMoreFavoriteBooks event,
+    Emitter<FavoriteState> emit,
+  ) async {
+    if (state.hasReachedMax || state.isFetchingNewBooks) return;
+
+    emit(state.copyWith(isFetchingNewBooks: true));
+
+    try {
+      final bookItems = await _databaseService.fetchNextFavoriteBooks(
+        userId: Global.bookUser.id!,
+      );
+
+      if (bookItems.isEmpty) {
+        return emit(state.copyWith(
+          hasReachedMax: true,
+          isFetchingNewBooks: false,
+        ));
+      }
+
+      List<BookItem>? previousBooks = state.bookItems;
+
+      previousBooks?.addAll(bookItems);
+
+      /// If the length of books return is less than 10, it means there's no more
+      /// books available in the user's favorite collection to fetch more books from
+      if (bookItems.length < 10) {
+        return emit(
+          state.copyWith(
+            status: RequestStatus.success,
+            bookItems: previousBooks,
+            hasReachedMax: true,
+            isFetchingNewBooks: false,
+          ),
+        );
+      }
+
+      return emit(state.copyWith(
+        status: RequestStatus.success,
+        bookItems: previousBooks,
+      ));
+    } on Failure catch (e) {
+      return emit(state.copyWith(
+          status: RequestStatus.failure, errorMessage: e.message));
+    }
   }
 }

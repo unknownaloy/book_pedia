@@ -14,10 +14,13 @@ class BookItem extends Equatable {
   @JsonKey(defaultValue: false)
   bool isFavorite;
 
-   BookItem({
+  final int? timeStamp;
+
+  BookItem({
     required this.id,
     required this.bookVolumeInfo,
     required this.isFavorite,
+    this.timeStamp,
   });
 
   @override

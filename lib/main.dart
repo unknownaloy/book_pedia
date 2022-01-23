@@ -7,6 +7,7 @@ import 'package:book_pedia/config/theme/light_theme.dart';
 import 'package:book_pedia/features/home/views/home_screen.dart';
 import 'package:book_pedia/features/authentication/modules/login/views/login_screen.dart';
 import 'package:book_pedia/common/views/splash_screen.dart';
+import 'package:book_pedia/locator_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  setupLocator();
   runApp(const MyApp());
 }
 

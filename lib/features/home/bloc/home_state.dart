@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 enum HomeStatus { initial, loading, success, empty, failure }
 
-enum HomeType {famous, searched}
+enum HomeType { famous, searched }
 
 @immutable
 class HomeState extends Equatable {
@@ -43,7 +43,14 @@ class HomeState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status, homeType, books, errorMessage, hasReachedMax, isFetchingNewBooks,];
+  List<Object?> get props => [
+        status,
+        homeType,
+        books,
+        errorMessage,
+        hasReachedMax,
+        isFetchingNewBooks,
+      ];
 }
 
 // @immutable
