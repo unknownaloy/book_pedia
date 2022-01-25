@@ -53,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       setState(() => _isAtBottom = false);
     }
-
   }
 
   @override
@@ -102,10 +101,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   bottom: 40.0,
                 ),
                 sliver: SliverToBoxAdapter(
-                  child: Text(
-                    AppLocalizations.of(context)!
-                        .exploreThousandsOfBooksOnTheGo,
-                    style: Theme.of(context).textTheme.headline2,
+                  child: TweenAnimationBuilder(
+                    tween: Tween<double>(begin: 0, end: 1),
+                    duration: const Duration(seconds: 1),
+                    builder: (context, double value, child) {
+                      return Opacity(
+                        opacity: value,
+                        child: child,
+                      );
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .exploreThousandsOfBooksOnTheGo,
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
                   ),
                 ),
               ),
@@ -258,19 +267,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SliverToBoxAdapter(
-                child: _isAtBottom && _isLoadingMoreData ? Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 4.0,
-                    ),
-                    width: 18.0,
-                    height: 18.0,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2.0,
-                      color: kAccentColor,
-                    ),
-                  ),
-                ) : const SizedBox.shrink(),
+                child: _isAtBottom && _isLoadingMoreData
+                    ? Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 4.0,
+                          ),
+                          width: 18.0,
+                          height: 18.0,
+                          child: const CircularProgressIndicator(
+                            strokeWidth: 2.0,
+                            color: kAccentColor,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
               ),
             ],
           ),
