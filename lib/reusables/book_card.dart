@@ -25,7 +25,7 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child:  Container(
+      child: Container(
         margin: const EdgeInsets.only(
           left: 16.0,
           right: 14.0,
@@ -53,19 +53,45 @@ class BookCard extends StatelessWidget {
               child: Hero(
                 tag: heroTag,
                 child: Image.network(
-                  imageUrl ??
-                      "https://www.w3schools.com/w3images/avatar6.png",
+                  imageUrl ?? "https://www.w3schools.com/w3images/avatar6.png",
                   fit: BoxFit.contain,
                   width: 104.0,
                   loadingBuilder: (context, child, progress) {
                     return progress == null
                         ? child
-                        : const CircularProgressIndicator();
+                        : Container(
+                            margin: const EdgeInsets.all(4.0),
+                            width: 88.0,
+                            height: 104.0,
+                            decoration: const BoxDecoration(
+                              color: kHighLightColor,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16.0),
+                              ),
+                            ),
+                            child: const Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.0,
+                                color: kAccentColor,
+                              ),
+                            ),
+                          );
                   },
                   errorBuilder: (context, child, progress) {
-                    return const Icon(
-                      Icons.error,
-                      color: kTextColor,
+                    return Container(
+                      margin: const EdgeInsets.all(4.0),
+                      width: 88.0,
+                      height: 104.0,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(16.0),
+                        ),
+                        color: kAccentColor,
+                      ),
+                      child: const Icon(
+                        Icons.error,
+                        color: kBaseColor,
+                      ),
                     );
                   },
                 ),
@@ -80,12 +106,12 @@ class BookCard extends StatelessWidget {
                 children: [
                   bookAuthor != null
                       ? Text(
-                    "by $bookAuthor",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2
-                        ?.copyWith(color: kHintColor),
-                  )
+                          "by $bookAuthor",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(color: kHintColor),
+                        )
                       : const SizedBox.shrink(),
                   const SizedBox(
                     height: 8.0,
@@ -121,11 +147,11 @@ class BookCard extends StatelessWidget {
                   ),
                   category != null
                       ? Chip(
-                    backgroundColor: kHighLightColor,
-                    label: Text(category!),
-                    labelStyle: Theme.of(context).textTheme.subtitle1,
-                    // labelPadding: const EdgeInsets.symmetric(vertical: 2.0),
-                  )
+                          backgroundColor: kHighLightColor,
+                          label: Text(category!),
+                          labelStyle: Theme.of(context).textTheme.subtitle1,
+                          // labelPadding: const EdgeInsets.symmetric(vertical: 2.0),
+                        )
                       : const SizedBox.shrink(),
                 ],
               ),
