@@ -116,4 +116,17 @@ class AuthRepositoryImpl extends AuthRepository {
     await _googleSignIn.signOut();
     await _auth.signOut();
   }
+
+  @override
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw Failure(e.message ?? kFirebaseAuthExceptionMessage);
+    } on SocketException {
+      throw Failure(kSocketExceptionMessage);
+    } catch (e) {
+      throw Failure(kCatchErrorMessage);
+    }
+  }
 }

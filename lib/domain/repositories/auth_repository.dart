@@ -13,6 +13,8 @@ abstract class AuthRepository {
     required String password,
   });
 
+  Future<void> forgotPassword(String email);
+
   bool isSignedIn();
 
   BookUser getUser();

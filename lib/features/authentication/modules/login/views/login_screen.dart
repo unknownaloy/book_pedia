@@ -1,6 +1,7 @@
 import 'package:book_pedia/data/repositories/auth_repository_impl.dart';
 import 'package:book_pedia/features/authentication/bloc/authentication_bloc.dart';
 import 'package:book_pedia/features/authentication/bloc/authentication_event.dart';
+import 'package:book_pedia/features/authentication/modules/forgot_password/view/forgot_password.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_bloc.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_event.dart';
 import 'package:book_pedia/features/authentication/modules/login/bloc/login_state.dart';
@@ -164,7 +165,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push<void>(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (BuildContext context) =>
+                                              const ForgotPassword(),
+                                        ),
+                                      );
+                                    },
                                     child: Text(
                                       AppLocalizations.of(context)!.forgotPassword,
                                       style: Theme.of(context)
