@@ -1,3 +1,4 @@
+import 'package:book_pedia/config/theme/colors.dart';
 import 'package:book_pedia/data/repositories/database_repository_impl.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_bloc.dart';
 import 'package:book_pedia/features/favorite/bloc/favorite_event.dart';
@@ -49,13 +50,18 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         body: BlocProvider(
           create: (context) => _favoriteBloc,
           child: Padding(
-            padding:
-                const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: BlocBuilder<FavoriteBloc, FavoriteState>(
               builder: (context, state) {
                 if (state.status == RequestStatus.empty) {
-                  return MessageDisplay(
-                      error: AppLocalizations.of(context)!.noResultFound);
+                  return Center(
+                    child: Image.asset(
+                      "assets/empty_box.png",
+                      width: 96.0,
+                      color: kAccentColor,
+                      colorBlendMode: BlendMode.srcATop,
+                    ),
+                  );
                 }
 
                 if (state.status == RequestStatus.failure) {
@@ -70,7 +76,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     onScrollEnd: () {
                       _favoriteBloc.add(FetchMoreFavoriteBooks());
                     },
-                    isLoadingMoreData: state.isFetchingNewBooks, // Whether to display bottom loading icon
+                    isLoadingMoreData: state
+                        .isFetchingNewBooks, // Whether to display bottom loading icon
                     onFavoriteHandler: (bookItem) => _favoriteBloc.add(
                       FavoritePressed(bookItem: bookItem),
                     ),
