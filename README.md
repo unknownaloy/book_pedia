@@ -16,7 +16,7 @@ books information.
 
 <img alt="Screenshot of the login screen" src="https://drive.google.com/uc?export=view&id=1osb3CmeRpLYdlVVDczpSH7SaK1DwcasR" height="640">
 
-<a href="https://drive.google.com/file/d/11q_pgR118nx5whfH6QmBAFLqYTst3Y-_"><img src="https://drive.google.com/uc?export=view&id=<FILEID>" style="height: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+<a href="https://drive.google.com/file/d/11q_pgR118nx5whfH6QmBAFLqYTst3Y"><img src="https://drive.google.com/uc?export=view&id=<FILEID>" style="height: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
 
 <img alt="Screenshot of the home screen" src="https://drive.google.com/uc?export=view&id=1hU3odk1pT9JdPnjmRY-VBbo6oFLEkLYf" height="640"> 
 
