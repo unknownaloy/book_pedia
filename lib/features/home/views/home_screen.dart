@@ -30,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool _isSearchedResult = false;
 
+  late String _searchedQueryText;
+
   bool _isAtBottom = false;
   bool _isLoadingMoreData = false;
 
@@ -150,8 +152,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _searchController,
                       onChanged: (_) {
-                        _homeBloc.add(SearchBooks(
-                            searchQuery: _searchController.text.trim()));
+                        _homeBloc.add(
+                          SearchBooks(
+                            searchQuery: _searchController.text.trim(),
+                          ),
+                        );
                       },
                       style: Theme.of(context).textTheme.bodyText1,
                       decoration: InputDecoration(
@@ -190,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: Text(
                       _isSearchedResult
-                          ? _searchController.text.trim()
+                          ? _searchedQueryText
                           : AppLocalizations.of(context)!.famousBooks,
                       style: Theme.of(context).textTheme.headline3,
                     ),
@@ -204,7 +209,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (state.homeType == HomeType.famous) {
                       setState(() => _isSearchedResult = false);
                     } else {
-                      setState(() => _isSearchedResult = true);
+                      setState(() {
+                        _isSearchedResult = true;
+                        _searchedQueryText = _searchController.text.trim();
+                      });
                     }
 
                     if (state.isFetchingNewBooks) {
@@ -212,6 +220,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     } else {
                       setState(() => _isLoadingMoreData = false);
                     }
+                  }
+
+                  if (state.status == HomeStatus.empty) {
+                    setState(() => _searchedQueryText = "No result found");
                   }
                 },
                 builder: (context, state) {
@@ -223,8 +235,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   if (state.status == HomeStatus.empty) {
                     return SliverFillRemaining(
-                      child: MessageDisplay(
-                          error: AppLocalizations.of(context)!.noResultFound),
+                      child: Center(
+                        child: Image.asset(
+                          "assets/no_search_result.png",
+                          width: 80.0,
+                          color: kAccentColor,
+                          colorBlendMode: BlendMode.srcATop,
+                        ),
+                      ),
                     );
                   }
 

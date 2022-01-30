@@ -43,15 +43,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _onSearchBooks(SearchBooks event, Emitter<HomeState> emit) async {
-    if (event.searchQuery == "") {
-      return emit(state.copyWith(books: _cachedBooks, homeType: HomeType.famous));
+    if (event.searchQuery == "" || event.searchQuery.isEmpty) {
+
+      return emit(state.copyWith(
+        books: _cachedBooks,
+        homeType: HomeType.famous,
+        status: HomeStatus.success,
+      ));
     }
 
     emit(state.copyWith(status: HomeStatus.loading));
 
     try {
-      final books =
-      await _booksService.fetchBooks(query: event.searchQuery);
+      final books = await _booksService.fetchBooks(query: event.searchQuery);
 
       if (books.totalItems == 0) {
         return emit(state.copyWith(status: HomeStatus.empty));
@@ -83,15 +87,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     try {
       state.homeType == HomeType.famous
-          ? books =
-              await _booksService.fetchBooks(startIndex: bookLastIndex)
+          ? books = await _booksService.fetchBooks(startIndex: bookLastIndex)
           : books = await _booksService.fetchBooks(
               startIndex: bookLastIndex,
               query: event.searchQuery!,
             );
 
       if (books.totalItems == 0) {
-        return emit(state.copyWith(hasReachedMax: true, isFetchingNewBooks: false));
+        return emit(
+            state.copyWith(hasReachedMax: true, isFetchingNewBooks: false));
       } else {
         Books? previousBooks = state.books;
 
@@ -102,7 +106,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }
 
         return emit(
-          state.copyWith(status: HomeStatus.success, books: previousBooks, isFetchingNewBooks: false,),
+          state.copyWith(
+            status: HomeStatus.success,
+            books: previousBooks,
+            isFetchingNewBooks: false,
+          ),
         );
       }
     } on Failure catch (e) {
