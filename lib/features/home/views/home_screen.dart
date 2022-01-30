@@ -39,11 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _searchListener() {
     setState(() => _searchQuery = _searchController.text.trim());
-    _homeBloc.add(
-      SearchBooks(
-        searchQuery: _searchQuery,
-      ),
-    );
   }
 
   void _scrollListenerHandler() {
@@ -165,6 +160,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _searchController,
                       style: Theme.of(context).textTheme.bodyText1,
+                      onChanged: (value) {
+                        print(value);
+                        _homeBloc.add(
+                          SearchBooks(
+                            searchQuery: _searchQuery,
+                          ),
+                        );
+                      },
                       decoration: InputDecoration(
                         prefixIcon: const Padding(
                           padding: EdgeInsets.only(
@@ -180,6 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? IconButton(
                                 onPressed: () {
                                   _searchController.clear();
+                                  _homeBloc.add(SearchBooks(searchQuery: _searchQuery));
                                 },
                                 icon: const Icon(Icons.close),
                               )

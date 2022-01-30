@@ -24,7 +24,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<FetchBooks>(_onFetchBooks);
   }
 
-  // TODO: Make this nullable to be able to check it's value and decide if making a call to the DB is necessary
   Books? _cachedBooks;
 
   EventTransformer<HomeEvent> debounce<HomeEvent>(Duration duration) {
@@ -43,7 +42,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _onSearchBooks(SearchBooks event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(status: HomeStatus.loading));
+
     if (event.searchQuery == "" || event.searchQuery.isEmpty) {
+      if (_cachedBooks == null) {
+        try {
+          final books = await _booksService.fetchBooks();
+          _cachedBooks = books;
+          return emit(state.copyWith(
+            status: HomeStatus.success,
+            homeType: HomeType.famous,
+            books: books,
+          ));
+        } on Failure catch (e) {
+          return emit(
+            state.copyWith(status: HomeStatus.failure, errorMessage: e.message),
+          );
+        }
+      }
 
       return emit(state.copyWith(
         books: _cachedBooks,
@@ -52,13 +68,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ));
     }
 
-    emit(state.copyWith(status: HomeStatus.loading));
-
     try {
       final books = await _booksService.fetchBooks(query: event.searchQuery);
 
       if (books.totalItems == 0) {
-        return emit(state.copyWith(status: HomeStatus.empty, homeType: HomeType.searched));
+        return emit(state.copyWith(
+            status: HomeStatus.empty, homeType: HomeType.searched));
       }
 
       emit(state.copyWith(
