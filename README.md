@@ -6,7 +6,7 @@ books information.
 ## Getting Started
 
 #### Get API key from Google Books API
-- Create a folder in the PROJECT_NAME/lib/config/api_keys called ***api_keys***
+- Create a folder in the PROJECT_NAME/lib/config/ called ***api_keys***
 - Create a dart file ***books_api.dart*** 
 - Inside the ***books_api.dart*** paste your API key ***const String clientId = PASTE YOUR API KEY HERE***
 - Run ***flutter pub get*** to get dependencies
