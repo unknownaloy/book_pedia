@@ -65,6 +65,14 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
 
     if (indexOfBookItem != -1) {
       tempBookItems.removeAt(indexOfBookItem);
+
+      if (tempBookItems.isEmpty) {
+        return emit(state.copyWith(
+          status: RequestStatus.empty,
+          hasReachedMax: true,
+        ));
+      }
+
       emit(state.copyWith(
           bookItems: tempBookItems,
           favoriteStatus: FavoriteStatus.notFavorite));

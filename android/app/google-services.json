@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:819384421061:android:7294a3d824c38beda0feac",
         "android_client_info": {
-          "package_name": "com.example.book_pedia"
+          "package_name": "com.chichebem.book_pedia"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "819384421061-defv5fcsgtak9nhvui0pr6547n6hasis.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.book_pedia",
+            "package_name": "com.chichebem.book_pedia",
             "certificate_hash": "d22ac6c4e4b9f3c22b8bcfbdd365ec01542c08ac"
           }
         },
@@ -42,7 +42,7 @@
               "client_id": "819384421061-m517l9g13mbs7js900mrikkcusect2ts.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.bookPedia"
+                "bundle_id": "com.chichebem.bookPedia"
               }
             }
           ]

@@ -1,4 +1,4 @@
-package com.example.book_pedia
+package com.chichebem.book_pedia
 
 import io.flutter.embedding.android.FlutterActivity
 
