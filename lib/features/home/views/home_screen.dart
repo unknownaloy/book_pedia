@@ -24,9 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
   late HomeBloc _homeBloc;
   final _booksService = BookRepositoryImpl();
 
-  final TextEditingController _searchController = TextEditingController();
+  late final TextEditingController _searchController;
 
   late final ScrollController _scrollController;
+
+  String _searchQuery = "";
 
   bool _isSearchedResult = false;
 
@@ -34,6 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool _isAtBottom = false;
   bool _isLoadingMoreData = false;
+
+  void _searchListener() {
+    setState(() => _searchQuery = _searchController.text.trim());
+    _homeBloc.add(
+      SearchBooks(
+        searchQuery: _searchQuery,
+      ),
+    );
+  }
 
   void _scrollListenerHandler() {
     double maxScroll = _scrollController.position.maxScrollExtent;
@@ -63,8 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _homeBloc = HomeBloc(booksService: _booksService);
     _homeBloc.add(FetchFamousBooks());
 
-    _scrollController = ScrollController();
+    _searchController = TextEditingController();
+    _searchController.addListener(_searchListener);
 
+    _scrollController = ScrollController();
     _scrollController.addListener(_scrollListenerHandler);
   }
 
@@ -151,13 +164,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: TextField(
                       controller: _searchController,
-                      onChanged: (_) {
-                        _homeBloc.add(
-                          SearchBooks(
-                            searchQuery: _searchController.text.trim(),
-                          ),
-                        );
-                      },
                       style: Theme.of(context).textTheme.bodyText1,
                       decoration: InputDecoration(
                         prefixIcon: const Padding(
@@ -170,6 +176,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icons.search,
                           ),
                         ),
+                        suffixIcon: _searchQuery.isNotEmpty
+                            ? IconButton(
+                                onPressed: () {
+                                  _searchController.clear();
+                                },
+                                icon: const Icon(Icons.close),
+                              )
+                            : const SizedBox.shrink(),
                         contentPadding: const EdgeInsets.only(
                           left: 24.0,
                           right: 24.0,
@@ -206,15 +220,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 bloc: _homeBloc,
                 listener: (context, state) {
                   if (state.status == HomeStatus.success) {
-                    if (state.homeType == HomeType.famous) {
-                      setState(() => _isSearchedResult = false);
-                    } else {
-                      setState(() {
-                        _isSearchedResult = true;
-                        _searchedQueryText = _searchController.text.trim();
-                      });
-                    }
-
                     if (state.isFetchingNewBooks) {
                       setState(() => _isLoadingMoreData = true);
                     } else {
@@ -224,6 +229,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   if (state.status == HomeStatus.empty) {
                     setState(() => _searchedQueryText = "No result found");
+                  }
+
+                  if (state.homeType == HomeType.famous) {
+                    setState(() => _isSearchedResult = false);
+                  } else {
+                    setState(() {
+                      _isSearchedResult = true;
+                      _searchedQueryText = _searchQuery;
+                    });
                   }
                 },
                 builder: (context, state) {

@@ -58,7 +58,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final books = await _booksService.fetchBooks(query: event.searchQuery);
 
       if (books.totalItems == 0) {
-        return emit(state.copyWith(status: HomeStatus.empty));
+        return emit(state.copyWith(status: HomeStatus.empty, homeType: HomeType.searched));
       }
 
       emit(state.copyWith(
